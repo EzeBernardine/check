@@ -6,7 +6,7 @@ import Cash from "./Cash";
 const Header = () => {
   return (
     <Container>
-      <Tabs
+      {/* <Tabs
         click={(tab) => console.log(tab, 'tab')}
         nonActiveColor={"#063159"}
         activeColor={"white"}
@@ -14,10 +14,10 @@ const Header = () => {
         full
       >
         <div label="Cash">
-          <Cash />
         </div>
         <div label="Other Items">Other Items</div>
-      </Tabs>
+      </Tabs> */}
+          <Cash />
     </Container>
   );
 };
