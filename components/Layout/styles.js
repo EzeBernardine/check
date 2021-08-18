@@ -8,4 +8,5 @@ export const Container = styled.div`
 `;
 export const Main = styled.div`
   background-color: #f3f3f3;
+  min-height: 100vh
 `;
