@@ -9,24 +9,34 @@ import Button from "../../../components/Button";
 import { useRouter } from "next/router";
 import Modal from "../../../components/Modal";
 import Fields from "../Fields";
+import CashWithdrawal from "../CashWithdrawal";
 
 const Cash = ({ items }) => {
   const [callModal, setCallModal] = useState(false);
-  const showModal = () => setCallModal(true);
+  const [type, setType] = useState("airtime");
+  const showModal = (type) => {
+    setCallModal(true);
+    setType(type);
+  };
   const hideModal = () => setCallModal(false);
+
+  const ModalType = {
+    airtime: { component: <Fields />, title: "Select Network" },
+    cashWithdrawal: { component: <CashWithdrawal />, title: "Select Account" },
+  };
 
   const transactions = [
     {
       name: "Airtime",
       date: "date",
       amount: "+200",
-      click: showModal,
+      click: () => showModal("airtime"),
     },
     {
       name: "Cash Withdrawal",
       date: "date",
       amount: "+200",
-      click: () => [],
+      click: () => showModal("cashWithdrawal"),
     },
   ];
 
@@ -76,8 +86,12 @@ const Cash = ({ items }) => {
         ))}
       </Grid>
 
-      <Modal show={callModal} handleClose={hideModal} title={"Select Network"}>
-        <Fields />
+      <Modal
+        show={callModal}
+        handleClose={hideModal}
+        title={ModalType[type].title}
+      >
+        {ModalType[type].component}
       </Modal>
     </Container>
   );

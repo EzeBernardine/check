@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { Flex, Grid } from "../../../components/Box/styles";
 import { Spacer } from "../../../components/Spacer/styles";
 import { _Header1, FieldWrap, Label, FormContainer } from "./styles";
+import Button from "../../../components/Button";
 
 const Fields = () => {
   const handleChange = () => {};
@@ -38,6 +39,17 @@ const Fields = () => {
               </FieldWrap>
             </Grid>
           </div>
+
+          <Button
+            text={"Submit"}
+            size="md"
+            bgColor={["primary", "main"]}
+            border={["transparent", "primary"]}
+            color={["primary", "white"]}
+            type="button"
+            onClick={() => []}
+            fullwidth
+          />
         </Grid>
 
         {/* <Spacer height="30px"></Spacer> */}
