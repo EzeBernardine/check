@@ -1,8 +1,7 @@
 import {
   Container,
   _Span,
-  Container2,
-  Tab,
+ 
   Container3,
   Container4,
 } from "./styles";
@@ -13,7 +12,7 @@ import { Header1, Small, Span, Header3 } from "../../../components/Font/styles";
 import { theme } from "../../../config/theme";
 import { Spacer } from "../../../components/Spacer/styles";
 import { Flex, Grid } from "../../../components/Box/styles";
-import Tabs from "../../../components/Tabs/index";
+import { generateID } from "../../../lib/generateID";
 
 const Cash = (props) => {
 
@@ -97,7 +96,7 @@ const Cash = (props) => {
         <Spacer height="20px"></Spacer>
         <Grid gap="20px">
           {transactions.map((transaction) => (
-            <Container4 justifyContent="space-between">
+            <Container4 justifyContent="space-between" key={generateID(15)}>
               <Flex direction="column" width="auto" alignItems="flex-start">
                 <Span
                   color={["primary", "main", theme]}
