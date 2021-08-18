@@ -6,6 +6,8 @@ import {
   Container3,
   Container4,
 } from "./styles";
+import withAuth from "../../../components/withAuth";
+
 import { useState } from "react";
 import { Header1, Small, Span, Header3 } from "../../../components/Font/styles";
 import { theme } from "../../../config/theme";
@@ -13,7 +15,10 @@ import { Spacer } from "../../../components/Spacer/styles";
 import { Flex, Grid } from "../../../components/Box/styles";
 import Tabs from "../../../components/Tabs/index";
 
-const Cash = () => {
+const Cash = (props) => {
+
+  console.log("props", props)
+  // const [transactions, setTransactions] = useState({});
   const transactions = [
     {
       name: "lorem i[sum",
@@ -132,4 +137,4 @@ const Cash = () => {
     </Container>
   );
 };
-export default Cash;
+export default withAuth(Cash);
