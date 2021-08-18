@@ -38,7 +38,8 @@ const palette = {
   },
   grey: {
     0: "#020a11",
-    100:'#555656'
+    100:'#555656',
+    200:'#b5b5b5'
   },
   transparent: {
     0: "transparent",

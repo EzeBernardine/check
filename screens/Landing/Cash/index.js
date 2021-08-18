@@ -1,18 +1,15 @@
-import {
-  Container,
-  _Span,
- 
-  Container3,
-  Container4,
-} from "./styles";
+import { Container, _Span, Container3, Container4 } from "./styles";
 import { useState } from "react";
 import { Header1, Small, Span, Header3 } from "../../../components/Font/styles";
 import { theme } from "../../../config/theme";
 import { Spacer } from "../../../components/Spacer/styles";
 import { Flex, Grid } from "../../../components/Box/styles";
 import { generateID } from "../../../lib/generateID";
+import Button from "../../../components/Button";
+import { useRouter } from "next/router";
 
 const Cash = () => {
+  const router = useRouter();
   const transactions = [
     {
       name: "lorem i[sum",
@@ -73,6 +70,16 @@ const Cash = () => {
         >
           300,000
         </Span>
+        <Spacer height="10px"></Spacer>
+        <Button
+          text={"Cashout"}
+          size="sm"
+          bgColor={["primary", "main"]}
+          border={["transparent", "primary"]}
+          color={["primary", "white"]}
+          type="button"
+          onClick={() => router.push("/cashout")}
+        />
       </Container3>
 
       <Spacer height="30px"></Spacer>
