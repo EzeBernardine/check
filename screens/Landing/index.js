@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <Container>
       <Tabs
-        click={(tab) => console.log(tab)}
+        click={(tab) => console.log(tab, 'tab')}
         nonActiveColor={"#063159"}
         activeColor={"white"}
         bgColor={"transaparent"}
