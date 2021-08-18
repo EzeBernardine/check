@@ -4,13 +4,7 @@ import { Flex, Grid } from "../../../components/Box/styles";
 export const Container = styled.div`
 
 `;
-export const Container2 = styled(Flex)``;
-export const Tab = styled(Flex)`
-  background-color: #063159;
-  padding: 10px;
-  flex: 1;
-  border-radius: 7px 7px 0 0;
-`;
+ 
 export const _Span = styled.span`
   color: white;
 `;
