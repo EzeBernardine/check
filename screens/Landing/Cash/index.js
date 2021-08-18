@@ -55,7 +55,7 @@ const Cash = (props) => {
         weight="fontWeightNormal"
         fontFamily="sagoeBold"
       >
-        Cash Winnings
+        Winnings
       </Header1>
 
       <Spacer height="30px"></Spacer>
@@ -68,7 +68,7 @@ const Cash = (props) => {
           weight="fontWeightNormal"
           fontFamily="sagoe"
         >
-          Total Cash
+          Balance
         </Small>
         <Span
           color={["grey", "0", theme]}
@@ -137,4 +137,5 @@ const Cash = (props) => {
     </Container>
   );
 };
-export default withAuth(Cash);
+// export default withAuth(Cash);
+export default Cash;
