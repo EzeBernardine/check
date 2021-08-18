@@ -8,7 +8,7 @@ export const TabList = styled("ol")`
   display: flex;
   width: 100%;
   background-color: ${({ bgColor, theme }) =>
-    bgColor ? bgColor : theme ? theme.palette.primary.main : "white"};
+    bgColor ? bgColor :  theme.palette.primary.main};
   height: auto;
   align-items: center;
   justify-content: flex-start;
@@ -27,7 +27,7 @@ export const ListItem = styled("li")`
   font-weight: bold;
   letter-spacing: 0.05rem;
   height: 100%;
-  background-color: transparent;
+  background-color: #f1f1f1;
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -38,6 +38,7 @@ export const ListItem = styled("li")`
       : theme
       ? theme.palette.grey[100]
       : "#b9a694"};
+  border-radius: 7px 7px 0 0;
   cursor: pointer;
   border-bottom: 2px solid transparent;
   margin: 0 10px;
@@ -66,6 +67,9 @@ export const ListItem = styled("li")`
         : theme
         ? theme.palette.common.white
         : "#de8430"};
+
+    background-color: ${({ nonActiveColor, theme }) =>
+      !nonActiveColor ? !nonActiveColor : theme.palette.primary["main"]};
     ::before {
       background: ${({ activeColor, theme }) =>
         activeColor
