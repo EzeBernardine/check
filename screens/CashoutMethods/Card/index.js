@@ -7,22 +7,9 @@ import { Flex, Grid } from "../../../components/Box/styles";
 import { generateID } from "../../../lib/generateID"; 
 import { useRouter } from "next/router";
 import Fields from "../Fields";
-import Withdrawal from "../../../pages/cashWithdrawal";
+import Withdrawal from "../../../pages/withdrawal";
 const Cash = ({ items }) => {
   const router = useRouter();
-  const [callModal, setCallModal] = useState(false);
-  const [type, setType] = useState("airtime");
-  const showModal = (type) => {
-    setCallModal(true);
-    setType(type);
-  };
-  const hideModal = () => setCallModal(false);
-
-  const ModalType = {
-    airtime: { component: <Fields />, title: "Select Network" },
-    cashWithdrawal: { component: <Withdrawal />, title: "Select Account" },
-  };
-
   const methods = [
     {
       name: "Airtime",

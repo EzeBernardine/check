@@ -1,7 +1,3 @@
-import { useRouter } from "next/router";
-import { useState } from "react";
-import Link from "next/link";
-import * as yup from "yup";
 import { Span, Small } from "../../../components/Font/styles";
 import { Flex, Grid } from "../../../components/Box/styles";
 import { Spacer } from "../../../components/Spacer/styles";

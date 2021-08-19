@@ -1,18 +1,17 @@
-import _CashWithdrawal from "../screens/CashWithdrawal";
 import Layout from "../components/Layout";
-import {Container1, Container3, Container4, FieldWrap, FormContainer, Label} from "../screens/CashWithdrawal/styles";
-import {Header3, Small, Span} from "../components/Font/styles";
+import {Container3, Container4, FieldWrap, FormContainer, Label} from "../screens/CashWithdrawal/styles";
+import {Header3} from "../components/Font/styles";
 import {theme} from "../config/theme";
 import {Spacer} from "../components/Spacer/styles";
-import {Flex, Grid} from "../components/Box/styles";
+import {Grid} from "../components/Box/styles";
 import Button from "../components/Button";
 import {useEffect, useState} from "react";
-import Cookies from "js-cookie";
 import * as tpsAction from "../actions/tps"
 import {Alert} from "kodobe-react-components";
-import {fundsTransfer} from "../actions/tps";
 
 export default function Withdrawal(props) {
+
+    console.log("Withdrawal Props", props);
     const [banks, setBanks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [validated, setValidated] = useState(false)
@@ -33,12 +32,14 @@ export default function Withdrawal(props) {
     };
 
     const handleChange = (e) => {
+        e.preventDefault();
+
         console.log("Account", {
             ...account,
             [e.target.name]: e.target.value,
         });
 
-        if(e.target.name == "bankCode"){
+        if (e.target.name == "bankCode") {
             setValidated(false);
         }
 
@@ -59,7 +60,7 @@ export default function Withdrawal(props) {
             //validate account number
             const {error, data} = await tpsAction.fundsTransfer.createTransferAuth(props.baseURL, account);
             console.log("Create Transfer Auth", error, data);
-            if(error) {
+            if (error) {
                 setLoading(false)
                 return Alert.showError({content: error});
             }
@@ -70,7 +71,7 @@ export default function Withdrawal(props) {
         }
 
 
-        if(!account.amount){
+        if (!account.amount) {
             setLoading(false);
             return Alert.showError({content: "Amount is required"});
         }
@@ -80,7 +81,7 @@ export default function Withdrawal(props) {
 
         console.log("makeFundsTransfer", error, data)
 
-        if(error) {
+        if (error) {
             setLoading(false)
             return Alert.showError({content: error});
         }
@@ -112,7 +113,8 @@ export default function Withdrawal(props) {
                                         <FieldWrap>
                                             <select name="bankCode" id="bankCode" onChange={handleChange}>
                                                 {banks && banks.map((bank) => {
-                                                    return <option key={bank.bankCode + bank.bankName} value={bank.bankCode}>{bank.bankName}</option>
+                                                    return <option key={bank.bankCode + bank.bankName}
+                                                                   value={bank.bankCode}>{bank.bankName}</option>
                                                 })}
                                             </select>
                                         </FieldWrap>

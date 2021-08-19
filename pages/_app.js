@@ -38,8 +38,6 @@ MyApp.getInitialProps = async (appContext) => {
     const appProps = await App.getInitialProps(appContext);
     const baseURL = process.env.BASE_ENDPOINT;
     const authURL = process.env.AUTH_URL;
-    const clientExtension = process.env.CLIENT_EXTENSION;
-    const stagingSuffix = process.env.STAGING_SUFFIX;
 
-    return { ...appProps, authURL, baseURL, clientExtension, stagingSuffix };
+    return { ...appProps, authURL, baseURL };
 };

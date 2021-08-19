@@ -7,7 +7,8 @@ import {errorHandler, getHeaders} from "../lib/utils";
 export const airtime = {
     getNetworks: async (baseURL) => {
         try {
-            const {data} = await axios.get(baseURL + `/3ps/v1/airtime/me`,{
+            // const {data} = await axios.get(baseURL + `/3ps/v1/airtime/networks`,{
+            const {data} = await axios.get(baseURL + `/3ps/v1/airtime/cdl/networks`,{
                 headers: getHeaders()
             });
             return {
@@ -17,10 +18,12 @@ export const airtime = {
             return {error: e.message};
         }
     },
-    buyAirtime: async (baseURL, payload, ledgerId) => {
+    buyAirtime: async (baseURL, payload) => {
         try {
-            console.log("Get headers", getHeaders())
-            const {data} = await axios.get(baseURL + `/users/v1/auths/me`,{
+
+            //to be removed
+            payload.provider = "cdl";
+            const {data} = await axios.post(baseURL + `/3ps/v1/airtime`, payload, {
                 headers: getHeaders()
             });
             return {

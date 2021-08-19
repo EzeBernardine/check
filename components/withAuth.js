@@ -7,7 +7,7 @@ import * as userAction from "../actions/user"
 
 const withAuth = (AuthComponent) => {
     const Wrapper = (props) => {
-        // console.log("In Auth", props)
+        console.log("In Auth", props)
         const {baseURL, authURL} = props
 
         const {query, ...router} = useRouter()
@@ -39,8 +39,16 @@ const withAuth = (AuthComponent) => {
 
             if (error) {
                 console.log("Errror", error)
-                const url = `${authURL}?clientId=${router.query?.clientId}&phoneNumber=${router.query?.phoneNumber}&redirectURL`;
-                console.log("URLLL", url);
+                Cookies.remove("auth-token")
+                let url = `${authURL}?clientId=${query["client-id"] || query.clientId}`;
+
+                if (query.phoneNumber) {
+                    url += `&type=phoneNumber&phoneNumber=${query.phoneNumber}`
+                }
+
+                url += `&redirect=${window.location.origin + window.location.pathname}`
+
+                console.log("URLLL", url, router.query);
                 // return;
                 return router.push(url)
             }
