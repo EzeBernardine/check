@@ -3,7 +3,7 @@ import { useState } from "react";
 import Tabs from "../../components/Tabs/index";
 import Cash from "./Cash";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <Container>
       {/* <Tabs
@@ -17,7 +17,7 @@ const Header = () => {
         </div>
         <div label="Other Items">Other Items</div>
       </Tabs> */}
-          <Cash />
+          <Cash {...props} />
     </Container>
   );
 };

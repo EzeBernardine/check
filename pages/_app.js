@@ -7,18 +7,18 @@ import {useRouter} from "next/router";
 import App from "next/app";
 
 function MyApp({Component, pageProps, ...rest}) {
+    const router = useRouter();
 
-    console.log("Pp", rest);
-    // const router = useRouter();
+    router.query.clientId = router.query["client-id"];
+    console.log("router", router.query);
+    // if (!router.query.clientId) return router.push("/404");
 
-    // router.query.clientId = router.query["client-id"];
-    // console.log("router", router.query);
-    // // if (!router.query.clientId) return router.push("/404");
-    //
-    // for (let key in router.query){
-    //     Cookies.set(key, router.query[key])
-    // }
-    // Cookies.set("clientId", router.query["client-id"])
+    const inFiveMinutes = new Date(new Date().getTime() + 5 * 60 * 1000);
+    for (let key in router.query){
+        Cookies.set(key, router.query[key], {expires: 1})
+    }
+    Cookies.set("clientId", router.query["client-id"])
+
     return (
         <ThemeProvider theme={theme}>
             <ProviderContext>
@@ -29,12 +29,12 @@ function MyApp({Component, pageProps, ...rest}) {
 }
 
 export default MyApp;
-MyApp.getInitialProps = async (appContext: any) => {
+MyApp.getInitialProps = async (appContext) => {
     const appProps = await App.getInitialProps(appContext);
-    const baseURL: any = process.env.BASE_ENDPOINT;
-    const authURL: any = process.env.AUTH_URL;
-    const clientExtension: any = process.env.CLIENT_EXTENSION;
-    const stagingSuffix: any = process.env.STAGING_SUFFIX;
+    const baseURL = process.env.BASE_ENDPOINT;
+    const authURL = process.env.AUTH_URL;
+    const clientExtension = process.env.CLIENT_EXTENSION;
+    const stagingSuffix = process.env.STAGING_SUFFIX;
 
     return { ...appProps, authURL, baseURL, clientExtension, stagingSuffix };
 };
