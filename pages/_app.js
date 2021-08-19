@@ -10,11 +10,6 @@ import {useEffect} from "react";
 function MyApp({Component, pageProps, ...rest}) {
     const router = useRouter();
 
-    router.query.clientId = router.query["client-id"];
-    console.log("router", router.query);
-
-
-
     // useEffect(() => {
         // console.log("Here", router);
         // if (!router.query.clientId && router.pathname !== "/404") {

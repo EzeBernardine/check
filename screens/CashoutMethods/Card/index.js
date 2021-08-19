@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import Fields from "../Fields";
 import CashWithdrawal from "../../../pages/cashWithdrawal";
 const Cash = ({ items }) => {
+  const router = useRouter();
   const [callModal, setCallModal] = useState(false);
   const [type, setType] = useState("airtime");
   const showModal = (type) => {
@@ -25,11 +26,11 @@ const Cash = ({ items }) => {
   const methods = [
     {
       name: "Airtime",
-      click: () => showModal("airtime"),
+      click: () => router.push("/airtime"),
     },
     {
       name: "Cash Withdrawal",
-      click: () => showModal("cashWithdrawal"),
+      click: () => router.push("/withdrawal"),
     },
   ];
 

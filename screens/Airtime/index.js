@@ -12,7 +12,6 @@ import { Header3 } from "../../components/Font/styles";
 import { Spacer } from "../../components/Spacer/styles";
 
 const Fields = () => {
-  const handleChange = () => {};
   return (
     <Container1>
       <Container2>
