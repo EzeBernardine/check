@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Flex } from "../../../components/Box/styles";
+import { Flex } from "../../components/Box/styles";
 
 export const Container3 = styled(Flex)`
   padding: 20px;

@@ -4,13 +4,10 @@ import { Header1, Small, Span, Header3 } from "../../../components/Font/styles";
 import { theme } from "../../../config/theme";
 import { Spacer } from "../../../components/Spacer/styles";
 import { Flex, Grid } from "../../../components/Box/styles";
-import { generateID } from "../../../lib/generateID";
-import Button from "../../../components/Button";
+import { generateID } from "../../../lib/generateID"; 
 import { useRouter } from "next/router";
-import Modal from "../../../components/Modal";
 import Fields from "../Fields";
-import CashWithdrawal from "../CashWithdrawal";
-
+import CashWithdrawal from "../../../pages/cashWithdrawal";
 const Cash = ({ items }) => {
   const [callModal, setCallModal] = useState(false);
   const [type, setType] = useState("airtime");
@@ -60,14 +57,6 @@ const Cash = ({ items }) => {
           </Cards>
         ))}
       </Grid>
-
-      <Modal
-        show={callModal}
-        handleClose={hideModal}
-        title={ModalType[type].title}
-      >
-        {ModalType[type].component}
-      </Modal>
     </Container>
   );
 };

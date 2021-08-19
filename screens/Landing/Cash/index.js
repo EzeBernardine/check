@@ -19,7 +19,7 @@ import {Alert, Spinner} from "kodobe-react-components";
 
 
 const Cash = (props) => {
-    console.log("Cash", props);
+    // console.log("Cash", props);
     const router = useRouter();
     const [balance, setBalance] = useState(0);
     const [loading, setLoading] = useState(true);

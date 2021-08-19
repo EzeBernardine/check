@@ -5,13 +5,23 @@ import "../styles/globals.css";
 import  Cookies from 'js-cookie'
 import {useRouter} from "next/router";
 import App from "next/app";
+import {useEffect} from "react";
 
 function MyApp({Component, pageProps, ...rest}) {
     const router = useRouter();
 
     router.query.clientId = router.query["client-id"];
     console.log("router", router.query);
-    // if (!router.query.clientId) return router.push("/404");
+
+
+
+    // useEffect(() => {
+        // console.log("Here", router);
+        // if (!router.query.clientId && router.pathname !== "/404") {
+        //     // window.location.href = window.location.origin + "/404";
+        //     return router.push("/404");
+        // }
+    // }, [])
 
     const inFiveMinutes = new Date(new Date().getTime() + 5 * 60 * 1000);
     for (let key in router.query){
