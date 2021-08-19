@@ -1,7 +1,14 @@
 import styled from "styled-components";
-import { Flex, Grid, Container, Frame } from "../../../components/Box/styles";
-import { Header1, Paragraph, Span } from "../../../components/Font/styles";
-import { Spacer } from "../../../components/Spacer/styles";
+import { Flex } from "../../components/Box/styles";
+
+export const Container1 = styled(Flex)`
+  padding: 20px;
+`;
+export const Container2 = styled(Flex)`
+  padding: 20px;
+  background-color: ${({ theme }) => theme.palette.common["white"]};
+  border-radius: ${({ theme }) => theme.shape.borderRadius5};
+`;
 
 // ------------------fields---------------
 export const FormContainer = styled(Flex)`

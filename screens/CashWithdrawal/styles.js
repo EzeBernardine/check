@@ -1,17 +1,29 @@
 import styled from "styled-components";
-import { Flex, Grid, Container, Frame } from "../../../components/Box/styles";
-import { Header1, Paragraph, Span } from "../../../components/Font/styles";
-import { Spacer } from "../../../components/Spacer/styles";
+import { Flex } from "../../components/Box/styles";
 
+export const Container3 = styled(Flex)`
+  padding: 20px;
+`;
+export const Container4 = styled(Flex)`
+  padding: 20px;
+  background-color: ${({ theme }) => theme.palette.common["white"]};
+  border-radius: ${({ theme }) => theme.shape.borderRadius5};
+`;
+
+
+
+export const Container2 = styled(Flex)`
+  padding: 20px;
+`;
 export const Container1 = styled(Flex)`
   background-color: ${({ theme }) => theme.palette.success[100]};
   border-radius: ${({ theme }) => theme.shape.borderRadius5};
   padding: 20px;
   small {
-      flex:1
+    flex: 1;
   }
   span {
-      flex:3;
+    flex: 3;
   }
 `;
 
