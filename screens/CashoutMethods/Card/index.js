@@ -25,17 +25,13 @@ const Cash = ({ items }) => {
     cashWithdrawal: { component: <CashWithdrawal />, title: "Select Account" },
   };
 
-  const transactions = [
+  const methods = [
     {
       name: "Airtime",
-      date: "date",
-      amount: "+200",
       click: () => showModal("airtime"),
     },
     {
       name: "Cash Withdrawal",
-      date: "date",
-      amount: "+200",
       click: () => showModal("cashWithdrawal"),
     },
   ];
@@ -44,11 +40,11 @@ const Cash = ({ items }) => {
     <Container>
       <Spacer height="20px"></Spacer>
       <Grid gap="20px">
-        {transactions.map((transaction) => (
+        {methods.map((method) => (
           <Cards
             justifyContent="space-between"
-            key={generateID(15)}
-            onClick={() => transaction.click()}
+            key={method.name}
+            onClick={() => method.click()}
           >
             <Flex direction="column" width="auto" alignItems="flex-start">
               <Span
@@ -58,28 +54,7 @@ const Cash = ({ items }) => {
                 weight="fontWeightNormal"
                 fontFamily="sagoeBold"
               >
-                {transaction.name}
-              </Span>
-              <Small
-                color={["primary", "main", theme]}
-                size="font14"
-                lineHeight="lineHeight16"
-                weight="fontWeightNormal"
-                fontFamily="sagoe"
-              >
-                {transaction.date}
-              </Small>
-            </Flex>
-
-            <Flex width="auto">
-              <Span
-                color={["primary", "main", theme]}
-                size="font16"
-                lineHeight="lineHeight19"
-                weight="fontWeightNormal"
-                fontFamily="sagoeBold"
-              >
-                {transaction.amount}
+                {method.name}
               </Span>
             </Flex>
           </Cards>
