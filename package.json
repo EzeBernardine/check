@@ -1,5 +1,5 @@
 {
-  "name": "okhi",
+  "name": "disbursementui",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,7 +16,6 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "styled-components": "^5.3.0",
-    "toastr": "^2.1.4",
     "yup": "^0.32.9"
   }
 }
