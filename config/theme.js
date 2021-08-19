@@ -10,7 +10,7 @@ const palette = {
   },
   primary: {
     main: "#063159",
-   
+
     white,
     black,
     transparent,
@@ -26,6 +26,8 @@ const palette = {
     contrastText: white,
   },
   success: {
+    0: "green",
+    100: "#d6f0d6",
     contrastText: white,
   },
   warning: {
@@ -38,7 +40,8 @@ const palette = {
   },
   grey: {
     0: "#020a11",
-    100:'#555656'
+    100: "#555656",
+    200: "#b5b5b5",
   },
   transparent: {
     0: "transparent",

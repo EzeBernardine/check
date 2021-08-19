@@ -14,7 +14,6 @@ export default function Home(props) {
     );
 }
 
-
 export const getServerSideProps = async (ctx) => {
     console.log(process, "kkkkkkkkkkkkk");
     console.log("AppP", ctx)
