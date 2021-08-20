@@ -54,6 +54,7 @@ const withAuth = (AuthComponent) => {
             }
 
             Cookies.set("user", JSON.stringify(data))
+            Cookies.set("userId", data.userId);
             setLoading(false);
         };
 

@@ -24,6 +24,13 @@ const Cash = (props) => {
     const [loading, setLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
     const ledgerId = Cookies.get("ledgerId")
+    let userId = Cookies.get("userId");
+    const user = JSON.parse(Cookies.get("user"));
+    if(!userId){
+        userId = user.userId
+    }
+
+    console.log("uSerId", user, userId);
     useEffect(() => {
         //get user wallet
         getUserWallet(ledgerId)
@@ -38,7 +45,7 @@ const Cash = (props) => {
 
 
     const getUserWallet = async (ledgerId) => {
-        const {error, data} = await billingAction.getWallet(props.baseURL, ledgerId)
+        const {error, data} = await billingAction.getWallet(props.baseURL, ledgerId, userId)
         if (error) return Alert.showError({content: error});
         setBalance(data?._embedded?.wallets?.[0]?.balance || 0)
         console.log("getUserWallet", error, data);
@@ -48,7 +55,7 @@ const Cash = (props) => {
     };
 
     const getUserWalletTransactions = async (ledgerId) => {
-        const {error, data} = await billingAction.getWalletTransactions(props.baseURL, ledgerId)
+        const {error, data} = await billingAction.getWalletTransactions(props.baseURL, ledgerId, userId)
         if (error) return Alert.showError({content: error});
         setTransactions(data?._embedded?.walletTransactions || [])
 
@@ -132,7 +139,7 @@ const Cash = (props) => {
                                     weight="fontWeightNormal"
                                     fontFamily="sagoeBold"
                                 >
-                                    {transaction.creditAmount ? "credit" : "debit"}
+                                    {transaction.narration.substring(0,30) + "..."}
                                 </Span>
                                 <Small
                                     color={["primary", "main", theme]}
@@ -153,7 +160,7 @@ const Cash = (props) => {
                                     weight="fontWeightNormal"
                                     fontFamily="sagoeBold"
                                 >
-                                    {transaction.creditAmount ? "+" + transaction.creditAmount : "-" + transaction.debitAmount}
+                                    {transaction.creditAmount ? "+" + (transaction.creditAmount/100) : "-" + (transaction.debitAmount/100)}
                                 </Span>
                             </Flex>
                         </Container4>

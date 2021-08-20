@@ -4,12 +4,13 @@
 import {errorHandler, getHeaders} from "../lib/utils";
 import axios from "axios";
 
-export const getWallet = async (baseURL, ledgerId) => {
+export const getWallet = async (baseURL, ledgerId,userId) => {
     try {
         const {data} = await axios.get(baseURL + `/billing/wallets`,{
             headers: getHeaders(),
             params: {
-                clientLedgerId: ledgerId
+                clientLedgerId: ledgerId,
+                customerId: userId
             }
         });
         return {
@@ -20,12 +21,13 @@ export const getWallet = async (baseURL, ledgerId) => {
     }
 };
 
-export const getWalletTransactions = async (baseURL, ledgerId) => {
+export const getWalletTransactions = async (baseURL, ledgerId, userId) => {
     try {
         const {data} = await axios.get(baseURL + `/billing/wallet-transactions`,{
             headers: getHeaders(),
             params: {
-                clientLedgerId: ledgerId
+                clientLedgerId: ledgerId,
+                customerId: userId,
             }
         });
         return {
