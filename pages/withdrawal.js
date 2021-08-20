@@ -8,6 +8,7 @@ import Button from "../components/Button";
 import {useEffect, useState} from "react";
 import * as tpsAction from "../actions/tps"
 import {Alert} from "kodobe-react-components";
+import Nav from '../components/Nav'
 
 export default function Withdrawal(props) {
 
@@ -92,6 +93,9 @@ export default function Withdrawal(props) {
     return (
         <Layout>
             <Container3>
+                <Nav navItems={[{name: 'Home /', href: '/'}, {name: 'Cashout', href: '/cashout'} ]}/>
+
+
                 <Container4>
                     <Header3
                         color={["grey", "0", theme]}

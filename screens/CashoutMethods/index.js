@@ -9,18 +9,6 @@ import Card from "./Card";
 const Landing = () => {
   return (
     <Container>
-      <Flex>
-        <Span
-          color={["grey", "0", theme]}
-          size="font14"
-          lineHeight="lineHeight16"
-          weight="fontWeightNormal"
-          fontFamily="sagoe"
-        >
-          Cashout
-        </Span>
-      </Flex>
-
       <Header3
         color={["grey", "0", theme]}
         size="font18"
