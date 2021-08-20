@@ -11,7 +11,6 @@ import withAuth from "../../../components/withAuth";
 import {theme} from "../../../config/theme";
 import {Spacer} from "../../../components/Spacer/styles";
 import {Flex, Grid} from "../../../components/Box/styles";
-import {generateID} from "../../../lib/generateID";
 
 
 import * as billingAction from "../../../actions/billing"
