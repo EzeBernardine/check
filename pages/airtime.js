@@ -10,9 +10,11 @@ import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import * as tpsAction from "../actions/tps";
 import {Alert} from "kodobe-react-components";
+import {useRouter} from "next/router";
 
 export default function Airtime(props) {
 
+    const router = useRouter();
     const [airtimePayload, setAirtimePayload] = useState({
         amount: 0,
         phoneNumber: Cookies.get("phoneNumber") || ""
@@ -28,7 +30,10 @@ export default function Airtime(props) {
     const getAllSupportedNetworks = async () => {
         const {error, data} = await tpsAction.airtime.getNetworks(props.baseURL);
         console.log("getAllSupportedNetworks", error, data);
-        if (error) return Alert.showError({content: error});
+        if (error) {
+            Alert.showError({content: error});
+            return router.push("/");
+        }
         setNetworks(data);
         setLoading(false)
     };
@@ -53,7 +58,16 @@ export default function Airtime(props) {
             return Alert.showError({content: "Amount is required"});
         }
 
-        //make actual transfer
+        const {error: transferAuthError, data: transferAuthData} = await tpsAction.transferAuth.createTransferAuth(props.baseURL, "airtime", airtimePayload);
+        console.log("transferAuth", transferAuthError, transferAuthData)
+        if (transferAuthError) {
+            setLoading(false)
+            return Alert.showError({content: "Oops! We are unable to complete your airtime purchase"});
+        }
+
+        //make transfer
+        airtimePayload.transferAuthId = transferAuthData.transferAuthId;
+        airtimePayload.clientLedgerId = Cookies.get("ledgerId");
         const {error, data} = await tpsAction.airtime.buyAirtime(props.baseURL, airtimePayload);
         console.log("buyAirtime", error, data)
 
