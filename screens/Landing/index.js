@@ -28,6 +28,7 @@ const Header = (props) => {
         </div>
         <div label="Other Items">Other Items</div>
       </Tabs> */}
+  
             <Cash {...props} items={items}/>
         </Container>
     );
