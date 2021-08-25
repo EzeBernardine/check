@@ -8,9 +8,14 @@ import Button from "../components/Button";
 import {useEffect, useState} from "react";
 import * as tpsAction from "../actions/tps"
 import {Alert} from "kodobe-react-components";
+import {useRouter} from "next/router";
+ 
 import Nav from '../components/Nav'
+ 
 
 export default function Withdrawal(props) {
+
+    const router = useRouter();
 
     console.log("Withdrawal Props", props);
     const [banks, setBanks] = useState([]);
@@ -26,7 +31,10 @@ export default function Withdrawal(props) {
 
     const getAllSupportedBanks = async () => {
         const {error, data} = await tpsAction.fundsTransfer.getBanksList(props.baseURL);
-        if (error) return Alert.showError({content: error});
+        if (error) {
+            Alert.showError({content: error});
+            return router.push("/");
+        }
         setBanks(data);
         setLoading(false)
 
@@ -59,7 +67,7 @@ export default function Withdrawal(props) {
         if (!validated) {
 
             //validate account number
-            const {error, data} = await tpsAction.fundsTransfer.createTransferAuth(props.baseURL, account);
+            const {error, data} = await tpsAction.transferAuth.createTransferAuth(props.baseURL, "fund-transfer", account);
             console.log("Create Transfer Auth", error, data);
             if (error) {
                 setLoading(false)

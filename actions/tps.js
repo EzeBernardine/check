@@ -3,12 +3,30 @@ import axios from "axios";
 import {errorHandler, getHeaders} from "../lib/utils";
 
 
+export const transferAuth = {
+    createTransferAuth: async (baseURL, type, payload) => {
+        try {
+            console.log("Get headers", getHeaders())
+            const {data} = await axios.post(baseURL + `/3ps/v2/transfer-auth`, {
+                type,
+                ...payload
+            }, {
+                headers: getHeaders()
+            });
+            return {
+                data: data.data
+            }
+        } catch (e) {
+            return {error: errorHandler(e)};
+        }
+    },
+}
 
 export const airtime = {
     getNetworks: async (baseURL) => {
         try {
             // const {data} = await axios.get(baseURL + `/3ps/v1/airtime/networks`,{
-            const {data} = await axios.get(baseURL + `/3ps/v1/airtime/cdl/networks`,{
+            const {data} = await axios.get(baseURL + `/3ps/v1/airtime/networks`, {
                 headers: getHeaders()
             });
             return {
@@ -22,8 +40,10 @@ export const airtime = {
         try {
 
             //to be removed
-            payload.provider = "cdl";
-            const {data} = await axios.post(baseURL + `/3ps/v1/airtime`, payload, {
+            const {data} = await axios.post(baseURL + `/3ps/v1/airtime`, {
+                ...payload,
+                amount: payload.amount * 100
+            }, {
                 headers: getHeaders()
             });
             return {
@@ -39,11 +59,8 @@ export const airtime = {
 export const fundsTransfer = {
     getBanksList: async (baseURL) => {
         try {
-            const {data} = await axios.get(baseURL + `/3ps/v1/banks`,{
-                headers: getHeaders(),
-                params: {
-                    provider: "paystack"
-                }
+            const {data} = await axios.get(baseURL + `/3ps/v1/banks`, {
+                headers: getHeaders()
             });
             return {
                 data: data.data
@@ -58,7 +75,7 @@ export const fundsTransfer = {
 
             payload.provider = "paystack";
             // const {data} = await axios.get(baseURL + `/3ps/v2/transfer-auth`,payload,{
-            const {data} = await axios.post(baseURL + `/3ps/v2/transfer-auth/paystack`, payload,{
+            const {data} = await axios.post(baseURL + `/3ps/v2/transfer-auth/paystack`, payload, {
                 headers: getHeaders()
             });
             return {
@@ -71,10 +88,11 @@ export const fundsTransfer = {
     makeFundsTransfer: async (baseURL, payload) => {
         try {
             console.log("Get headers", getHeaders())
-
-            payload.provider = "paystack";
             // const {data} = await axios.get(baseURL + `/3ps/v1/fundtransfer`,payload,{
-            const {data} = await axios.post(baseURL + `/3ps/v1/fundtransfer/paystack`, payload,{
+            const {data} = await axios.post(baseURL + `/3ps/v1/fundtransfer`, {
+                ...payload,
+                amount: payload.amount * 100
+            }, {
                 headers: getHeaders()
             });
             return {
