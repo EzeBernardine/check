@@ -8,11 +8,8 @@ import Button from "../components/Button";
 import {useEffect, useState} from "react";
 import * as tpsAction from "../actions/tps"
 import {Alert} from "kodobe-react-components";
-<<<<<<< HEAD
 import {useRouter} from "next/router";
-=======
 import Nav from '../components/Nav'
->>>>>>> c6d9817 (Added navigator)
 
 export default function Withdrawal(props) {
 
