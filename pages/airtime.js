@@ -10,7 +10,11 @@ import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import * as tpsAction from "../actions/tps";
 import {Alert} from "kodobe-react-components";
+<<<<<<< HEAD
 import {useRouter} from "next/router";
+=======
+import Nav from '../components/Nav'
+>>>>>>> c6d9817 (Added navigator)
 
 export default function Airtime(props) {
 
@@ -81,6 +85,9 @@ export default function Airtime(props) {
     return (
         <Layout>
             <Container1>
+                <Nav navItems={[{name: 'Home /', href: '/'}, {name: 'Cashout', href: '/cashout'} ]}/>
+
+
                 <Container2>
                     <Header3
                         color={["grey", "0", theme]}

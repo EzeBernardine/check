@@ -142,3 +142,14 @@ export const ListItem = styled.li`
   color: ${({ color: [key, value], theme }) => theme.palette[key][value]};
   font-size: ${({ size, theme }) => theme.fontSizes[size]};
 `;
+export const Italics = styled.i`
+  font-family: ${({ theme, fontFamily }) =>
+    theme.typography.fontFamily[fontFamily]};
+  font-weight: ${({ theme, weight }) => theme.typography[weight]};
+  line-height: ${({ lineHeight, theme }) =>
+    theme.typography.lineHeight[lineHeight]};
+  text-align: ${({ textAlign, center }) =>
+    center ? "center" : textAlign ? textAlign : "initial"};
+  color: ${({ color: [key, value], theme }) => theme.palette[key][value]};
+  font-size: ${({ size, theme }) => theme.fontSizes[size]};
+`;

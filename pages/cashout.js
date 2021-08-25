@@ -1,12 +1,14 @@
 import Layout from "../components/Layout";
 import {Container} from "../screens/CashoutMethods/styles";
-import {Header3, Span} from "../components/Font/styles";
+import {Header3, Span, Italics} from "../components/Font/styles";
 import {theme} from "../config/theme";
 import Card from "../screens/CashoutMethods/Card";
 import {Spacer} from "../components/Spacer/styles";
 import {Flex, Grid} from "../components/Box/styles";
 import {Cards} from "../screens/CashoutMethods/Card/styles";
 import {useRouter} from "next/router";
+import Link from "next/link";
+import Nav from '../components/Nav'
 
 export default function Cashout(props) {
     const router = useRouter();
@@ -24,6 +26,8 @@ export default function Cashout(props) {
     return (
         <Layout>
             <Container>
+                <Nav navItems={[{name: 'Home', href: '/>'}]}/>
+
                 <Header3
                     color={["grey", "0", theme]}
                     size="font18"
