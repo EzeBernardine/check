@@ -26,7 +26,7 @@ export default function Cashout(props) {
     return (
         <Layout>
             <Container>
-                <Nav navItems={[{name: 'Home', href: '/>'}]}/>
+                <Nav navItems={[{name: 'Home', href: '/'}]}/>
 
                 <Header3
                     color={["grey", "0", theme]}
