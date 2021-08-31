@@ -52,9 +52,9 @@ const Cash = ( props) => {
 
     if (loading) {
         return (
-            <div className="center">
+            <Flex className="center">
                 <Spinner/>
-            </div>
+            </Flex>
         );
     }
     return (

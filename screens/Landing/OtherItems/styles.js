@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Flex, Grid } from "../../../components/Box/styles";
+import { Flex } from "../../../components/Box/styles";
 
 export const Container = styled.div``;
 
@@ -12,6 +12,9 @@ export const Button = styled.button`
   color: ${({ theme }) => theme.palette.success[0]};
   background-color: ${({ theme }) => theme.palette.success[200]};
   border-radius: ${({ theme }) => theme.shape.borderRadius10};
+  &.unpaid {
+    color: ${({ theme }) => theme.palette.secondary["0"]};
+  }
 `;
 
 export const Container3 = styled(Flex)`
@@ -25,8 +28,8 @@ export const Container4 = styled(Flex)`
   padding: 10px;
   > div:first-child {
     flex: 1;
-    > span{
-        padding-left: 5px;
+    > span {
+      padding-left: 5px;
     }
   }
 `;
