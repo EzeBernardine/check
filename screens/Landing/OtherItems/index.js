@@ -9,15 +9,15 @@ import {Alert, Spinner} from "kodobe-react-components";
 import {Spacer} from "../../../components/Spacer/styles";
 import {Flex, Frame, Grid} from "../../../components/Box/styles";
 import { generateID } from "../../../lib/generateID";
-import hamperImage from '../../../public/Assets/hamper.png'
-import * as invoicingAction from "../../../actions/invoice"
+import * as invoicingAction from "../../../actions/invoice";
+import Modal from '../../../components/Modal'
 
 
 
 const OtherItems = (props) => {
-    const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [invoices, setInvoices] = useState([]);
+    const [invoiceId, setInvoiceId] = useState('');
     let userId = Cookies.get("userId");
     const user = Cookies.get("user") && JSON.parse(Cookies.get("user"));
     if(!userId){
@@ -25,38 +25,24 @@ const OtherItems = (props) => {
     }
 
     useEffect(() => {
-        setLoading(false)
-
         const getInvoices = async () => {
+            setLoading(true)
             const {error, data} = await invoicingAction.getInvoices(props.baseURL,  userId)
             if (error) return Alert.showError({content: error});
-            setInvoices(data)
-            console.log("getInvoices", error, data);
+            setInvoices(data.data)
+            console.log("getInvoices", error, data.data);
             setLoading(false)
     
         };
         getInvoices().catch(console.error);
     }, [])
-
-
-   const otherItems =[
-       {
-           image: hamperImage,
-           item: 'Lunch for two',
-           collected:true,
-       },
-       {
-           image: hamperImage,
-           item: 'Shopping for three weekends',
-           collected:true,
-       }
-   ]
+ 
 
     if (loading) {
         return (
-            <div className="center">
+            <Flex className="center">
                 <Spinner/>
-            </div>
+            </Flex>
         );
     }
 
@@ -72,20 +58,34 @@ const OtherItems = (props) => {
                 Other Items
             </Header1>
 
+            <Modal show={invoiceId} title='Redemption Code' handleClose={() => setInvoiceId(null)}>
+               <Flex>
+               <Span
+                    color={["grey", "0", theme]}
+                    size="font16"
+                    lineHeight="lineHeight16"
+                    weight="fontWeightMedium"
+                    fontFamily="sagoe"
+                    center
+                >
+                    {invoiceId}
+                </Span>
+               </Flex>
+            </Modal>
 
             <Spacer height="30px"></Spacer>
 
             <div>
                 <Grid gap="20px">
-                    {otherItems.map((otherItem) => (
-                        <Container4 justifyContent="space-between" key={generateID(16)}>
+                    {invoices.map((otherItem) => (
+                        <Container4 justifyContent="space-between" key={generateID(16)} onClick={() => setInvoiceId(otherItem?.id)}>
                             <Flex  width="auto" alignItems="center" justifyContent='flex-start' wrap='nowrap'>
                                 <Frame
                                     height='50px'
                                     width='50px'
                                     object='contain'
                                 >
-                                  <img src={otherItem.image} alt=''/>
+                                  <img src={otherItem?.product?.image } alt=''/>
                                 </Frame>
                                 <Span
                                     color={["grey", "0", theme]}
@@ -94,22 +94,31 @@ const OtherItems = (props) => {
                                     weight="fontWeightMedium"
                                     fontFamily="sagoe"
                                 >
-                                    {otherItem.item}
+                                    {otherItem?.product?.description}
                                 </Span>
                             </Flex>
 
                             <Flex width="auto">
-                                <Button
-                                    text={"Submit"}
-                                    size="md"
-                                    bgColor={["primary", "white"]}
-                                    border={["transparent", "primary"]}
-                                    color={["primary", "main"]}
-                                    type="button"
-                                    onClick={() => []}
-                                >
-                                  Completed
-                                </Button>
+                                {
+                                    otherItem?.status === 'PAID' ?
+                                    <Button
+                                        text={"Submit"}
+                                        type="button"
+                                        onClick={() => []}
+                                    >
+                                        Completed
+                                    </Button>
+                                    : otherItem?.status === 'UNPAID' ?
+                                    <Button
+                                        text={"Submit"} 
+                                        className='unpaid'
+                                        type="button"
+                                        onClick={() => []}
+                                    >
+                                    Pending
+                                    </Button>
+                                : null
+                                }
                             </Flex>
                         </Container4>
                     ))}
