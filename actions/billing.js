@@ -37,3 +37,29 @@ export const getWalletTransactions = async (baseURL, ledgerId, userId) => {
         return {error: errorHandler(e)};
     }
 };
+
+export const getClientLedgers= async (baseURL) => {
+    try {
+        const {data} = await axios.get(baseURL + `/billing/client-ledger`,{
+            headers: getHeaders(),
+        });
+        return {
+            data: data
+        }
+    } catch (e) {
+        return {error: errorHandler(e)};
+    }
+};
+
+export const getClientLedger = async (baseURL, clientLedgerId) => {
+    try {
+        const {data} = await axios.get(baseURL + `/billing/client-ledger/${clientLedgerId}`,{
+            headers: getHeaders(),
+        });
+        return {
+            data: data
+        }
+    } catch (e) {
+        return {error: errorHandler(e)};
+    }
+};
