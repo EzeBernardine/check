@@ -18,34 +18,50 @@ const Tabs = ({
   bgColor,
   full,
 }) => {
-  const [activeTab, setActiveTab] = useState(children[0].props.label);
+    const childrenCopy = [];
+    children.filter(x => x !== null).map(child => {
+        if(Array.isArray(child)){
+            child.map(_child =>{
+                    if(Array.isArray(_child)) {
+                        _child?.props?.children.map(__child =>  childrenCopy.push(__child))
+                    } else {
+                        childrenCopy.push(_child)
+                    }
+                })
+        }else{
+            childrenCopy.push(child)
+        }
+    })
 
-  const onClickTabItem = (tab) => {
-    click(tab);
+  const [activeTab, setActiveTab] = useState(childrenCopy[0].props.label);
+
+  const onClickTabItem = (tab, idx) => {
+    click(childrenCopy[idx].props.value);
     setActiveTab(tab);
   };
   return (
     <TabWrapper activeColor={activeColor}>
       <TabList bgColor={bgColor}>
-        {children.map((child) => {
-          const { label } = child.props;
+        {childrenCopy.filter(x => x !== null).map((child, idx) => {
+            
+          const label = child && child.props;
           return (
             <Tab
               activeTab={activeTab}
               key={generateID(15)}
-              label={label}
+              label={label?.label }
               nonActiveColor={nonActiveColor}
               activeColor={activeColor}
               full={full}
-              onClick={onClickTabItem}
+              onClick={(tab) => onClickTabItem(tab, idx)}
             />
           );
         })}
       </TabList>
       <TabContent>
-        {children.map((child) => {
-          if (child.props.label !== activeTab) return undefined;
-          return child.props.children;
+        {childrenCopy.filter(x => x !== null).map((child) => {
+          if (child?.props?.label !== activeTab) return undefined;
+          return child?.props.children;
         })}
       </TabContent>
     </TabWrapper>

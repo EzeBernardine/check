@@ -5,13 +5,40 @@ import {Container, Container3, Container4, Button } from "./styles";
 import {Header1, Small, Span, Header3} from "../../../components/Font/styles";
 import withAuth from "../../../components/withAuth";
 import {theme} from "../../../config/theme";
+import {Alert, Spinner} from "kodobe-react-components";
 import {Spacer} from "../../../components/Spacer/styles";
 import {Flex, Frame, Grid} from "../../../components/Box/styles";
 import { generateID } from "../../../lib/generateID";
 import hamperImage from '../../../public/Assets/hamper.png'
+import * as invoicingAction from "../../../actions/invoice"
+
 
 
 const OtherItems = (props) => {
+    const router = useRouter();
+    const [loading, setLoading] = useState(true);
+    const [invoices, setInvoices] = useState([]);
+    let userId = Cookies.get("userId");
+    const user = Cookies.get("user") && JSON.parse(Cookies.get("user"));
+    if(!userId){
+        userId = user?.userId
+    }
+
+    useEffect(() => {
+        setLoading(false)
+
+        const getInvoices = async () => {
+            const {error, data} = await invoicingAction.getInvoices(props.baseURL,  userId)
+            if (error) return Alert.showError({content: error});
+            setInvoices(data)
+            console.log("getInvoices", error, data);
+            setLoading(false)
+    
+        };
+        getInvoices().catch(console.error);
+    }, [])
+
+
    const otherItems =[
        {
            image: hamperImage,
@@ -24,6 +51,15 @@ const OtherItems = (props) => {
            collected:true,
        }
    ]
+
+    if (loading) {
+        return (
+            <div className="center">
+                <Spinner/>
+            </div>
+        );
+    }
+
     return (
         <Container>
             <Header1
