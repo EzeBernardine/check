@@ -31,6 +31,7 @@ const Cash = ( props) => {
     useEffect(() => {
         getUserWallet( props?.clientLedger?.id || userId).catch(console.error);
         getUserWalletTransactions(  props?.clientLedger?.id || userId).catch(console.error);
+        handlePaymentProvider(  props?.clientLedger?.id || userId).catch(console.error);
     }, [])
 
 
@@ -38,7 +39,16 @@ const Cash = ( props) => {
         const {error, data} = await billingAction.getWallet(props.baseURL, ledgerId, userId)
         if (error) return Alert.showError({content: error});
         setBalance(data?._embedded?.wallets?.[0]?.balance || 0)
-        // console.log("getUserWallet", error, data);
+        setLoading(false)
+
+    };
+
+    const handlePaymentProvider = async (ledgerId) => {
+        const {error, data} = await billingAction.getPaymentProvider(props.baseURL, ledgerId)
+        if (error) return Alert.showError({content: error});
+        // setBalance(data?._embedded?.wallets?.[0]?.balance || 0)
+
+        console.log(data._embedded?.paymentProviders, 'payament provider')
         setLoading(false)
 
     };
@@ -47,7 +57,6 @@ const Cash = ( props) => {
         const {error, data} = await billingAction.getWalletTransactions(props.baseURL, ledgerId, userId)
         if (error) return Alert.showError({content: error});
         setTransactions(data?._embedded?.walletTransactions || [])
-        // console.log("getUserWalletTransactions", error, data);
     };
 
     if (loading) {
@@ -93,9 +102,9 @@ const Cash = ( props) => {
                 <Spacer height="10px"></Spacer>
                 <Flex>
                     {
-                        props?.clientLedger?.status === 'tipup' ?
+                        props?.clientLedger?.status === 'topup' ?
                         <Button
-                            text={"TopUp"}
+                            text={"Top Up"}
                             size="sm"
                             bgColor={["primary", "main"]}
                             border={["transparent", "primary"]}
@@ -125,7 +134,7 @@ const Cash = ( props) => {
                              onClick={() => router.push("/cashout")}
                          />
                             <Button
-                            text={"TopUp"}
+                            text={"Top Up"}
                             size="sm"
                             bgColor={["primary", "main"]}
                             border={["transparent", "primary"]}
@@ -153,7 +162,7 @@ const Cash = ( props) => {
 
                 <Spacer height="20px"></Spacer>
                 <Grid gap="20px">
-                    {transactions.map((transaction) => (
+                    {transactions.length?  transactions.map((transaction) => (
                         <Container4 justifyContent="space-between" key={transaction.id}>
                             <Flex direction="column" width="auto" alignItems="flex-start">
                                 <Span
@@ -190,7 +199,9 @@ const Cash = ( props) => {
                                 </Span>
                             </Flex>
                         </Container4>
-                    ))}
+                    )) : 
+                    <span>You have not transcations yet!</span>
+                    }
                 </Grid>
             </div>
         </Container>

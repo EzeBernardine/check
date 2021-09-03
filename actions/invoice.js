@@ -22,3 +22,21 @@ export const getInvoices = async (baseURL, userId) => {
 };
 
 
+export const createInvoices = async (baseURL,invoice) => {
+    try {
+        const {data} = await axios.post(`${baseURL}/invoicing/v1/invoices`,
+        {
+            ...invoice
+        },
+        {
+            headers: getHeaders(),
+        });
+        return {
+            data: data
+        }
+    } catch (e) {
+        return {error: errorHandler(e)};
+    }
+};
+
+

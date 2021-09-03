@@ -21,7 +21,7 @@ export const TabList = styled("ol")`
 export const ListItem = styled("li")`
   position: relative;
   list-style: none;
-  padding: 0.8rem 0;
+  padding: 0.8rem 1rem ; 
   flex: ${({ full }) => full && 1};
   font-size: 16px;
   font-weight: bold;

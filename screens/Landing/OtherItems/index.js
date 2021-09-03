@@ -77,7 +77,7 @@ const OtherItems = (props) => {
 
             <div>
                 <Grid gap="20px">
-                    {invoices.map((otherItem) => (
+                    {invoices.length? invoices.map((otherItem) => (
                         <Container4 justifyContent="space-between" key={generateID(16)} onClick={() => setInvoiceId(otherItem?.id)}>
                             <Flex  width="auto" alignItems="center" justifyContent='flex-start' wrap='nowrap'>
                                 <Frame
@@ -121,7 +121,8 @@ const OtherItems = (props) => {
                                 }
                             </Flex>
                         </Container4>
-                    ))}
+                    )) : <span>No data found!</span>
+                    }
                 </Grid>
             </div>
         </Container>

@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { Flex } from "../../../components/Box/styles";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  padding: 0 30px;
+`;
 
 export const _Span = styled.span`
   color: white;

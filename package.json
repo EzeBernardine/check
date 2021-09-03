@@ -16,6 +16,7 @@
     "next-images": "^1.7.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-paystack": "^3.0.4",
     "styled-components": "^5.3.0",
     "yup": "^0.32.9"
   },

@@ -11,10 +11,12 @@ import { generateID } from "../../lib/generateID";
 const Header = (props) => {
     const [clientLedgers, setCLientLedgers] = useState([])
     const [clientLedger, setCLientLedger] = useState([])
+    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
         const  handleGetClientLedgers = async () => {
+            setLoading(true)
             const {data, error} = await getClientLedgers(props?.baseURL)
             if(data){
                 setCLientLedgers(data?._embedded?.clientLedgers)
@@ -22,6 +24,7 @@ const Header = (props) => {
             if(error){
                 Alert.showError({content: error});
             }
+            setLoading(false)
         }
         handleGetClientLedgers()
     }, [])
@@ -37,12 +40,12 @@ const Header = (props) => {
         bgColor={"transaparent"}
         full
       >
-        {/* <div label="Cash" value=''>
-          <Cash {...props}  ledgerId={ledgerId}  />
-        </div> */}
-
         {
-          clientLedgers?.length ?  clientLedgers?.map(ledger => (
+            loading ? 
+            <div label="Loading..." value=''>
+                <Spinner />    
+            </div> :
+            clientLedgers?.length ?  clientLedgers?.map(ledger => (
                     <div label={ledger?.name} value={ledger} key={generateID(16)}>
                          <Cash {...props} clientLedger={clientLedger}  />
                     </div> 

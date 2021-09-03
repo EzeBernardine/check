@@ -15,13 +15,10 @@ export default function TopUp(props) {
     console.log("Cashout Props", props)
     const methods = [
         {
-            name: "Airtime",
-            click: () => window.location.href = "/airtime", //i am using this so i can get the props in airtime,
+            name: "Paystack",
+            click: () => window.location.href = "/amount", //i am using this so i can get the props in airtime,
         },
-        {
-            name: "Cash Withdrawal",
-            click: () => window.location.href = "/withdrawal", //i am using this so i can get the props in withdrawals
-        },
+  
     ];
     return (
         <Layout>
