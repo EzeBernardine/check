@@ -47,3 +47,10 @@ const loopObj = (obj: object) => {
 export const goto404 = () => {
     router.push("/404");
 };
+
+
+export const redirectToLogin = (AUTH_URL: string) => {
+    window.location.href =
+      AUTH_URL +
+      `?redirect=${window.location.host}&extra=${window.location.pathname}`;
+  };

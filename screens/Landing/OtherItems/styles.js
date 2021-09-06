@@ -17,6 +17,18 @@ export const Button = styled.button`
   &.unpaid {
     color: ${({ theme }) => theme.palette.secondary["0"]};
   }
+  &.redemptionCode {
+    color: #063159;
+    border-radius: 0;
+    margin-top: 10px;
+    padding: 0;
+    background: transparent;
+    text-transform: uppercase;
+    font-weight: bold;
+    &:hover {
+        text-decoration: underline;
+    }
+  }
 `;
 
 export const Container3 = styled(Flex)`

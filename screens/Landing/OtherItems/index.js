@@ -78,7 +78,7 @@ const OtherItems = (props) => {
             <div>
                 <Grid gap="20px">
                     {invoices.length? invoices.map((otherItem) => (
-                        <Container4 justifyContent="space-between" key={generateID(16)} onClick={() => setInvoiceId(otherItem?.id)}>
+                        <Container4 justifyContent="space-between" key={generateID(16)} >
                             <Flex  width="auto" alignItems="center" justifyContent='flex-start' wrap='nowrap'>
                                 <Frame
                                     height='50px'
@@ -87,15 +87,24 @@ const OtherItems = (props) => {
                                 >
                                   <img src={otherItem?.product?.image } alt=''/>
                                 </Frame>
-                                <Span
-                                    color={["grey", "0", theme]}
-                                    size="font16"
-                                    lineHeight="lineHeight16"
-                                    weight="fontWeightMedium"
-                                    fontFamily="sagoe"
-                                >
-                                    {otherItem?.product?.description}
-                                </Span>
+                                <Flex direction='column' alignItems='flex-start' pad='0 0 0 10px'>
+                                    <Span
+                                        color={["grey", "0", theme]}
+                                        size="font16"
+                                        lineHeight="lineHeight16"
+                                        weight="fontWeightMedium"
+                                        fontFamily="sagoe"
+                                    >
+                                        {otherItem?.product?.description}
+                                    </Span>
+                                    <Button
+                                        text={"Submit"}
+                                        className='redemptionCode'
+                                        type="button"
+                                        onClick={() => setInvoiceId(otherItem?.id)}                                    >
+                                        See Redemption Code
+                                    </Button>
+                                </Flex>
                             </Flex>
 
                             <Flex width="auto">

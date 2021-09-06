@@ -4,11 +4,10 @@ module.exports = withImages({
     return config;
   },
   env: {
-    GEO_API: process.env.NEXT_PUBLIC_ANALYTICS_ID,
+    BASE_ENDPOINT: process.env.NEXT_PUBLIC_BASE_ENDPOINT,
+    AUTH_URL: process.env.NEXT_PUBLIC_AUTH_URL,
+    PAYSTACK_PUBLIC_KEY: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
   },
   target: "serverless",
   distDir: "out",
-  images: {
-    domains: ["res.cloudinary.com"],
-  },
 });
