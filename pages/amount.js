@@ -17,16 +17,18 @@ import {Alert} from "kodobe-react-components";
 import Nav from '../components/Nav'
  
 
-export default function Amount({baseURL}) {
+export default function Amount() {
     const [loading, setLoading] = useState(false);
     const [initiate, setInitiate] = useState(false);
     let userId = Cookies.get("userId");
+    const baseURL = process.env.BASE_ENDPOINT;
+    
     const [paymentData, setPaymentData] = useState({
         email: `micheal@kodobe.com`,
         redirectUrl: "https://google.com",
         reference: "",
         amount: '',
-        publicKey: "pk_test_f5e62f12e5061b9f3b49d5411cf7b335bdf3e65c",
+        publicKey: process.env.PAYSTACK_PUBLIC_KEY ,
       });
  
     const handleCreateInvoice = async (invoice) => {
@@ -134,12 +136,4 @@ export default function Amount({baseURL}) {
     );
 }
 
-export const getServerSideProps = async (ctx) => {
-    const baseURL = process.env.BASE_ENDPOINT;
-    const authURL = process.env.AUTH_URL;
-
-
-    return {
-        props: {baseURL, authURL}
-    };
-};
+ 

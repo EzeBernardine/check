@@ -67,18 +67,18 @@ export const ButtonStyle = styled.button`
   align-items: center;
   background: ${({ bgColor, isLoading, theme, disabled }) =>
     isLoading || disabled
-      ? theme.palette.grey[800]
+      ? theme.palette.grey[200]
       : bgColor.length > 2
       ? renderGradient(bgColor, theme)
       : renderBackgroundColor(bgColor, theme)};
   color: ${({ theme, color: [key, value], isLoading, disabled }) =>
     isLoading || disabled
-      ? theme.palette.grey[600]
+      ? theme.palette.grey[300]
       : theme.palette[key][value]};
   border: 2px solid
     ${({ theme, border: [key, value] = [], isLoading, disabled }) =>
       isLoading || disabled
-        ? theme.palette.grey[800]
+        ? theme.palette.grey[200]
         : !!key
         ? theme.palette[key][value]
         : "transparent"};
