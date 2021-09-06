@@ -7,7 +7,7 @@ module.exports = withImages({
     GEO_API: process.env.NEXT_PUBLIC_ANALYTICS_ID,
   },
   target: "serverless",
-  distDir: "out",
+  distDir: ".next",
   images: {
     domains: ["res.cloudinary.com"],
   },
