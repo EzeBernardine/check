@@ -30,8 +30,8 @@ const withAuth = (AuthComponent) => {
 
                 url += `&redirect=${window.location.origin + window.location.pathname}`
                 console.log("URL", url);
-                return;
-                // return router.push(url);
+                // return;
+                return router.push(url);
             }
 
             const {error, data} = await userAction.me(baseURL);
@@ -49,8 +49,8 @@ const withAuth = (AuthComponent) => {
                 url += `&redirect=${window.location.origin + window.location.pathname}`
 
                 console.log("URLLL", url, router.query);
-                return;
-                // return router.push(url)
+                // return;
+                return router.push(url)
             }
 
             Cookies.set("user", JSON.stringify(data))

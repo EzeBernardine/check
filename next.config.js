@@ -1,5 +1,4 @@
-const withImages = require("next-images");
-module.exports = withImages({
+module.exports = {
   webpack(config, options) {
     return config;
   },
@@ -10,7 +9,4 @@ module.exports = withImages({
   },
   target: "serverless",
   distDir: ".next",
-  images: {
-    domains: ["res.cloudinary.com"],
-  },
-});
+}
