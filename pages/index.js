@@ -18,9 +18,9 @@ export const getServerSideProps = async (ctx) => {
     // console.log(process, "kkkkkkkkkkkkk");
     // console.log("AppP", ctx)
     // const appProps = await App.getInitialProps(ctx);
-    // console.log("AppP", appProps)
     const baseURL = process.env.BASE_ENDPOINT;
     const authURL = process.env.AUTH_URL;
+    console.log("AppP", authURL, baseURL)
 
 
     return {
