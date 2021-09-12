@@ -8,5 +8,5 @@ module.exports = {
     PAYSTACK_PUBLIC_KEY: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
   },
   target: "serverless",
-  distDir: "out",
+  distDir: ".next",
 };
