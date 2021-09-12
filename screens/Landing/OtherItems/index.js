@@ -92,7 +92,7 @@ const OtherItems = (props) => {
                                         weight="fontWeightMedium"
                                         fontFamily="sagoe"
                                     >
-                                        {invoice?.products?.[0]?.description}
+                                        {invoice?.products?.[0]?.name}
                                     </Span>
                                     <Button
                                         text={"Submit"}
