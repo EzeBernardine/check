@@ -10,7 +10,7 @@ export const Container = styled("div")`
   bottom: 0;
   z-index: 10000000;
   background: rgba(0, 0, 0, 0.25);
-  max-width: 400px;
+  max-width: 480px;
   margin: auto;
   visibility: ${(props) => (props.show ? "visible" : "hidden")};
 `;
@@ -21,7 +21,7 @@ export const Overlay = styled("div")`
   left: 0;
   right: 0;
   bottom: 0;
-  max-width: 400px;
+  max-width: 480px;
   margin: auto;
 `;
 
@@ -36,7 +36,7 @@ export const Main = styled("main")`
   align-items: center;
   justify-content: center;
   transition: 300ms ease-in-out;
-  max-width: 400px;
+  max-width: 480px;
   margin: auto;
   transform: ${(props) =>
     props.show ? "translateY(0)" : "translateY(-80vh);"};
@@ -44,7 +44,7 @@ export const Main = styled("main")`
 
 export const ModalWrap = styled("div")`
   position: relative;
-  max-width: 400px;
+  max-width: 480px;
   width: 90%;
   max-height: 80vh;
   height: max-content;

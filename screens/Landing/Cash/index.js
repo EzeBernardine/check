@@ -17,30 +17,21 @@ import * as billingAction from "../../../actions/billing"
 import {Alert, Spinner} from "kodobe-react-components";
 
 
-const Cash = (props) => {
-    // console.log("Cash", props);
+const Cash = ( props) => {
     const router = useRouter();
     const [balance, setBalance] = useState(0);
     const [loading, setLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
-    const ledgerId = Cookies.get("ledgerId")
     let userId = Cookies.get("userId");
     const user = JSON.parse(Cookies.get("user"));
     if(!userId){
         userId = user.userId
     }
 
-    console.log("uSerId", user, userId);
     useEffect(() => {
-        //get user wallet
-        getUserWallet(ledgerId)
-            .catch(console.error);
-
-
-        getUserWalletTransactions(ledgerId)
-            .catch(console.error);
-
-
+        getUserWallet( props?.clientLedger?.id || userId).catch(console.error);
+        getUserWalletTransactions(  props?.clientLedger?.id || userId).catch(console.error);
+        handlePaymentProvider(  props?.clientLedger?.id || userId).catch(console.error);
     }, [])
 
 
@@ -48,8 +39,16 @@ const Cash = (props) => {
         const {error, data} = await billingAction.getWallet(props.baseURL, ledgerId, userId)
         if (error) return Alert.showError({content: error});
         setBalance(data?._embedded?.wallets?.[0]?.balance || 0)
-        console.log("getUserWallet", error, data);
+        setLoading(false)
 
+    };
+
+    const handlePaymentProvider = async (ledgerId) => {
+        const {error, data} = await billingAction.getPaymentProvider(props.baseURL, ledgerId)
+        if (error) return Alert.showError({content: error});
+        // setBalance(data?._embedded?.wallets?.[0]?.balance || 0)
+
+        console.log(data._embedded?.paymentProviders, 'payament provider')
         setLoading(false)
 
     };
@@ -58,15 +57,13 @@ const Cash = (props) => {
         const {error, data} = await billingAction.getWalletTransactions(props.baseURL, ledgerId, userId)
         if (error) return Alert.showError({content: error});
         setTransactions(data?._embedded?.walletTransactions || [])
-
-        console.log("getUserWalletTransactions", error, data);
     };
 
     if (loading) {
         return (
-            <div className="center">
+            <Flex className="center">
                 <Spinner/>
-            </div>
+            </Flex>
         );
     }
     return (
@@ -103,15 +100,51 @@ const Cash = (props) => {
                     {balance ? balance / 100 : 0}
                 </Span>
                 <Spacer height="10px"></Spacer>
-                <Button
-                    text={"Cashout"}
-                    size="sm"
-                    bgColor={["primary", "main"]}
-                    border={["transparent", "primary"]}
-                    color={["primary", "white"]}
-                    type="button"
-                    onClick={() => router.push("/cashout")}
-                />
+                <Flex>
+                    {
+                        props?.clientLedger?.status === 'topup' ?
+                        <Button
+                            text={"Top Up"}
+                            size="sm"
+                            bgColor={["primary", "main"]}
+                            border={["transparent", "primary"]}
+                            color={["primary", "white"]}
+                            type="button"
+                            onClick={() => router.push("/topup")}
+                        />                       
+                       :  props?.clientLedger?.status === 'cashout' ?
+                         <Button
+                             text={"Cashout"}
+                             size="sm"
+                             bgColor={["primary", "main"]}
+                             border={["transparent", "primary"]}
+                             color={["primary", "white"]}
+                             type="button"
+                             onClick={() => router.push("/cashout")}
+                         />
+                        : 
+                        <>
+                            <Button
+                             text={"Cashout"}
+                             size="sm"
+                             bgColor={["primary", "main"]}
+                             border={["transparent", "primary"]}
+                             color={["primary", "white"]}
+                             type="button"
+                             onClick={() => router.push("/cashout")}
+                         />
+                            <Button
+                            text={"Top Up"}
+                            size="sm"
+                            bgColor={["primary", "main"]}
+                            border={["transparent", "primary"]}
+                            color={["primary", "white"]}
+                            type="button"
+                            onClick={() => router.push("/topup")}
+                        />  
+                        </>
+                    }
+                </Flex>
             </Container3>
 
             <Spacer height="30px"></Spacer>
@@ -129,11 +162,13 @@ const Cash = (props) => {
 
                 <Spacer height="20px"></Spacer>
                 <Grid gap="20px">
-                    {transactions.map((transaction) => (
+                    {transactions.length?  transactions.map((transaction) => (
                         <Container4 justifyContent="space-between" key={transaction.id}>
                             <Flex direction="column" width="auto" alignItems="flex-start">
                                 <Span
                                     color={["primary", "main", theme]}
+                                    size="font16"
+                                    lineHeight="lineHeight19"
                                     size="font16"
                                     lineHeight="lineHeight19"
                                     weight="fontWeightNormal"
@@ -164,7 +199,9 @@ const Cash = (props) => {
                                 </Span>
                             </Flex>
                         </Container4>
-                    ))}
+                    )) : 
+                    <span>You have not transcations yet!</span>
+                    }
                 </Grid>
             </div>
         </Container>

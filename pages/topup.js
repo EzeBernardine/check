@@ -10,18 +10,15 @@ import {useRouter} from "next/router";
 import Link from "next/link";
 import Nav from '../components/Nav'
 
-export default function Cashout(props) {
+export default function TopUp(props) {
     const router = useRouter();
     console.log("Cashout Props", props)
     const methods = [
         {
-            name: "Airtime",
-            click: () => window.location.href = "/airtime", //i am using this so i can get the props in airtime,
+            name: "Paystack",
+            click: () => window.location.href = "/amount", //i am using this so i can get the props in airtime,
         },
-        {
-            name: "Cash Withdrawal",
-            click: () => window.location.href = "/withdrawal", //i am using this so i can get the props in withdrawals
-        },
+  
     ];
     return (
         <Layout>
@@ -35,7 +32,7 @@ export default function Cashout(props) {
                     weight="fontWeightNormal"
                     fontFamily="sagoeBold"
                 >
-                    Cashout
+                    TopUp
                 </Header3>
                 <Spacer height="20px"></Spacer>
                 <Grid gap="20px">

@@ -28,6 +28,7 @@ const palette = {
   success: {
     0: "green",
     100: "#d6f0d6",
+    200: '#e0eedf',
     contrastText: white,
   },
   warning: {
@@ -42,6 +43,7 @@ const palette = {
     0: "#020a11",
     100: "#555656",
     200: "#b5b5b5",
+    300: "#a6a6a6",
   },
   transparent: {
     0: "transparent",
