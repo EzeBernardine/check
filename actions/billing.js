@@ -66,6 +66,7 @@ export const getClientLedger = async (baseURL, clientLedgerId) => {
 
 export const getPaymentProvider = async (baseURL, clientLedgerId) => {
     try {
+        // const {data} = await axios.get(baseURL + `/billing/payment-providers/?clientLedgerId=${clientLedgerId}`,{
         const {data} = await axios.get(baseURL + `/billing/payment-providers/?clientLedgerId=${clientLedgerId}`,{
             headers: getHeaders(),
         });
@@ -76,3 +77,19 @@ export const getPaymentProvider = async (baseURL, clientLedgerId) => {
         return {error: errorHandler(e)};
     }
 };
+export const getPaymentProviderByQuery = async (baseURL, query) => {
+    try {
+        // const {data} = await axios.get(baseURL + `/billing/payment-providers/?clientLedgerId=${clientLedgerId}`,{
+        const {data} = await axios.get(baseURL + `/billing/payment-providers/`,{
+            headers: getHeaders(),
+            params: query
+        });
+        return {
+            data: data
+        }
+    } catch (e) {
+        return {error: errorHandler(e)};
+    }
+};
+
+

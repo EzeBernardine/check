@@ -22,6 +22,8 @@ const Cash = ( props) => {
     const [balance, setBalance] = useState(0);
     const [loading, setLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
+    const [cashoutProviders, setCashoutProviders] = useState([]);
+    const [topupProviders, setTopupProviders] = useState([]);
     let userId = Cookies.get("userId");
     const user = JSON.parse(Cookies.get("user"));
     if(!userId){
@@ -29,6 +31,7 @@ const Cash = ( props) => {
     }
 
     useEffect(() => {
+        console.log("props?.clientLedger?.id ",props?.clientLedger?.id );
         getUserWallet( props?.clientLedger?.id || userId).catch(console.error);
         getUserWalletTransactions(  props?.clientLedger?.id || userId).catch(console.error);
         handlePaymentProvider(  props?.clientLedger?.id || userId).catch(console.error);
@@ -49,6 +52,10 @@ const Cash = ( props) => {
         // setBalance(data?._embedded?.wallets?.[0]?.balance || 0)
 
         console.log(data._embedded?.paymentProviders, 'payament provider')
+
+        setCashoutProviders(data._embedded?.paymentProviders?.filter(provider => provider.providerType === "CASH_OUT"))
+        setTopupProviders(data._embedded?.paymentProviders?.filter(provider => provider.providerType === "PAYMENT"))
+
         setLoading(false)
 
     };
@@ -102,46 +109,32 @@ const Cash = ( props) => {
                 <Spacer height="10px"></Spacer>
                 <Flex>
                     {
-                        props?.clientLedger?.status === 'topup' ?
-                        <Button
-                            text={"Top Up"}
-                            size="sm"
-                            bgColor={["primary", "main"]}
-                            border={["transparent", "primary"]}
-                            color={["primary", "white"]}
-                            type="button"
-                            onClick={() => router.push("/topup")}
-                        />                       
-                       :  props?.clientLedger?.status === 'cashout' ?
-                         <Button
-                             text={"Cashout"}
-                             size="sm"
-                             bgColor={["primary", "main"]}
-                             border={["transparent", "primary"]}
-                             color={["primary", "white"]}
-                             type="button"
-                             onClick={() => router.push("/cashout")}
-                         />
-                        : 
                         <>
-                            <Button
-                             text={"Cashout"}
-                             size="sm"
-                             bgColor={["primary", "main"]}
-                             border={["transparent", "primary"]}
-                             color={["primary", "white"]}
-                             type="button"
-                             onClick={() => router.push("/cashout")}
-                         />
-                            <Button
-                            text={"Top Up"}
-                            size="sm"
-                            bgColor={["primary", "main"]}
-                            border={["transparent", "primary"]}
-                            color={["primary", "white"]}
-                            type="button"
-                            onClick={() => router.push("/topup")}
-                        />  
+                            {
+                                cashoutProviders.length ?
+                                <Button
+                                    text={"Cashout"}
+                                    size="sm"
+                                    bgColor={["primary", "main"]}
+                                    border={["transparent", "primary"]}
+                                    color={["primary", "white"]}
+                                    type="button"
+                                    onClick={() => router.push({pathname: "cashout", query: {ledgerId: props?.clientLedger?.id}})}
+                                /> : ""
+                            }
+                            {
+                                topupProviders.length ?
+                                <Button
+                                    text={"Top Up"}
+                                    size="sm"
+                                    bgColor={["primary", "main"]}
+                                    border={["transparent", "primary"]}
+                                    color={["primary", "white"]}
+                                    type="button"
+                                    onClick={() => router.push("/topup")}
+                                />
+                                    : ""
+                            }
                         </>
                     }
                 </Flex>
@@ -199,7 +192,7 @@ const Cash = ( props) => {
                                 </Span>
                             </Flex>
                         </Container4>
-                    )) : 
+                    )) :
                     <span>You have not transcations yet!</span>
                     }
                 </Grid>

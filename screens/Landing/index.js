@@ -9,9 +9,9 @@ import { useEffect, useState } from "react";
 import { generateID } from "../../lib/generateID";
 
 const Header = (props) => {
-    const [clientLedgers, setCLientLedgers] = useState([])
-    const [clientLedger, setCLientLedger] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [clientLedgers, setClientLedgers] = useState([])
+    const [clientLedger, setClientLedger] = useState([])
+    const [loading, setLoading] = useState(true)
 
 
     useEffect(() => {
@@ -19,7 +19,8 @@ const Header = (props) => {
             setLoading(true)
             const {data, error} = await getClientLedgers(props?.baseURL)
             if(data){
-                setCLientLedgers(data?._embedded?.clientLedgers)
+                setClientLedgers(data?._embedded?.clientLedgers || [])
+                // setClientLedger(data?._embedded?.clientLedgers[0])
             }
             if(error){
                 Alert.showError({content: error});
@@ -29,26 +30,26 @@ const Header = (props) => {
         handleGetClientLedgers()
     }, [])
 
-   
+
 
   return (
     <Container>
       <Tabs
-        click={(tab) => setCLientLedger(tab)}
+        click={(tab) => setClientLedger(tab)}
         nonActiveColor={"#063159"}
         activeColor={"white"}
         bgColor={"transaparent"}
         full
       >
         {
-            loading ? 
+            loading ?
             <div label="Loading..." value=''>
-                <Spinner />    
+                <Spinner />
             </div> :
             clientLedgers?.length ?  clientLedgers?.map(ledger => (
-                    <div label={ledger?.name} value={ledger} key={generateID(16)}>
+                    <div label={ledger?.name} value={ledger} key={ledger.id}>
                          <Cash {...props} clientLedger={clientLedger}  />
-                    </div> 
+                    </div>
                 )
             )
             : null
