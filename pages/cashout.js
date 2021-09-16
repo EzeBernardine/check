@@ -19,7 +19,7 @@ const  Cashout = (props) =>  {
     const [loading, setLoading] = useState(true);
     const [providers, setProviders] = useState([]);
     useEffect(() => {
-        if(!props?.router?.query.ledgerId){
+        if(!props?.router?.query.ledger){
             return router.push("/");
         }
 
@@ -30,12 +30,12 @@ const  Cashout = (props) =>  {
         const {error, data} = await billingAction.getPaymentProviderByQuery(props.baseURL, {clientLedgerId: ledgerId, providerType: "CASH_OUT"})
         if (error) {
             Alert.showError({content: error});
-            return router.push("/");
+            // return router.push("/");
         }
         const providers = data._embedded?.paymentProviders || [];
         if (!providers?.length){
             Alert.showError({content: "Cash-out is not supported for this method"});
-            return router.push("/");
+            // return router.push("/");
         }
         setProviders(data._embedded?.paymentProviders || [])
         setLoading(false)
