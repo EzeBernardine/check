@@ -23,7 +23,6 @@ export default function Disburse(props) {
     const [provider, setProvider] = useState(null);
     const [payload, setPayload] = useState({});
     const [inputs, setInputs] = useState([])
-    const [networks, setNetworks] = useState([]);
     const [pageLoading, setPageLoading] = useState(true);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
@@ -99,7 +98,12 @@ export default function Disburse(props) {
             return Alert.showError({content: "Oops! We are unable to complete your airtime purchase"});
         }
 
+        if(transferAuthData.transferAuthId){
+            return Alert.showSuccess({content: "Process"});
+        }
         setLoading(false)
+        // inputs.push()
+        // setInputs(inputs);
     }
 
 
