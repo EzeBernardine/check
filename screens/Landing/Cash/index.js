@@ -123,7 +123,7 @@ const Cash = (props) => {
                                         type="button"
                                         onClick={() => router.push({
                                             pathname: "cashout",
-                                            query: {ledger: props?.clientLedger?.id, provider: cashoutProviders?.id, wallet: wallet?.id}
+                                            query: {ledger: props?.clientLedger?.id, wallet: wallet?.id}
                                         })}
                                     /> : ""
                             }
@@ -167,12 +167,10 @@ const Cash = (props) => {
                                         color={["primary", "main", theme]}
                                         size="font16"
                                         lineHeight="lineHeight19"
-                                        size="font16"
-                                        lineHeight="lineHeight19"
                                         weight="fontWeightNormal"
                                         fontFamily="sagoeBold"
                                     >
-                                        {transaction.narration.substring(0, 30) + "..."}
+                                        {transaction.narration?.substring(0, 30) + "..."}
                                     </Span>
                                     <Small
                                         color={["primary", "main", theme]}

@@ -3,6 +3,39 @@ import axios from "axios";
 import {errorHandler, getHeaders} from "../lib/utils";
 
 
+export const disburse = {
+    initialize: async (baseURL, type) => {
+        try {
+            console.log("Get headers", getHeaders())
+            const {data} = await axios.get(baseURL + `/3ps/v1/disbursement/` + type + "/initialize",  {
+                headers: getHeaders()
+            });
+            return {
+                data: data.data
+            }
+        } catch (e) {
+            return {error: errorHandler(e)};
+        }
+    },
+
+    process: async (baseURL, type, payload) => {
+        try {
+            const headers = getHeaders();
+            const {data} = await axios.post(baseURL + `/3ps/v1/disbursement/` + type + "/process",  {
+                clientId: headers["client-id"],
+                ...payload
+            },{
+                headers
+            });
+            return {
+                data: data.data
+            }
+        } catch (e) {
+            return {error: errorHandler(e)};
+        }
+    },
+}
+
 export const transferAuth = {
     createTransferAuth: async (baseURL, type, payload) => {
         try {

@@ -18,24 +18,26 @@ const  Cashout = (props) =>  {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [providers, setProviders] = useState([]);
+    console.log("Router", router.query)
     useEffect(() => {
         if(!props?.router?.query.ledger){
             return router.push("/");
         }
 
         handlePaymentProvider(props?.router?.query.ledgerId)
+        //get wallet
     }, [])
 
     const handlePaymentProvider = async (ledgerId) => {
         const {error, data} = await billingAction.getPaymentProviderByQuery(props.baseURL, {clientLedgerId: ledgerId, providerType: "CASH_OUT"})
         if (error) {
             Alert.showError({content: error});
-            // return router.push("/");
+            return router.push("/");
         }
         const providers = data._embedded?.paymentProviders || [];
         if (!providers?.length){
             Alert.showError({content: "Cash-out is not supported for this method"});
-            // return router.push("/");
+            return router.push("/");
         }
         setProviders(data._embedded?.paymentProviders || [])
         setLoading(false)
@@ -69,7 +71,10 @@ const  Cashout = (props) =>  {
                         <Cards
                             justifyContent="space-between"
                             key={provider.id}
-                            onClick={() => console.log("Provider", provider)}
+                            onClick={() => router.push({
+                                pathname: "disburse",
+                                query: {ledger: props?.router?.query.ledger, provider: provider?.id}
+                            })}
                         >
                             <Flex direction="column" width="auto" alignItems="flex-start">
                                 <Span

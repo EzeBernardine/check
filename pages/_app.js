@@ -26,9 +26,9 @@ function MyApp({Component, pageProps, ...rest}) {
     console.log("Version: 13", process.env);
     const inFiveMinutes = new Date(new Date().getTime() + 5 * 60 * 1000);
     for (let key in router.query) {
-        Cookies.set(key, router.query[key], {expires: inFiveMinutes})
+        // Cookies.set(key, router.query[key], {expires: inFiveMinutes})
+        Cookies.set(key, router.query[key], {expires: 1})
     }
-    Cookies.set("clientId", router.query["client-id"])
     return (
         <ThemeProvider theme={theme}>
             <ProviderContext>
