@@ -31,7 +31,7 @@ function MyApp({Component, pageProps, ...rest}) {
     Cookies.set("clientId", router.query["client-id"])
 
     useEffect(() => {
-        getClientInfo();
+        // getClientInfo();
       }, []);
 
       const getClientInfo = async () => {
