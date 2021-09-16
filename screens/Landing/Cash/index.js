@@ -119,7 +119,7 @@ const Cash = ( props) => {
                                     border={["transparent", "primary"]}
                                     color={["primary", "white"]}
                                     type="button"
-                                    onClick={() => router.push({pathname: "cashout", query: {ledgerId: props?.clientLedger?.id}})}
+                                    onClick={() => router.push({pathname: "cashout", query: {ledger: props?.clientLedger, provider: cashoutProviders}})}
                                 /> : ""
                             }
                             {
@@ -193,7 +193,7 @@ const Cash = ( props) => {
                             </Flex>
                         </Container4>
                     )) :
-                    <span>You have not transcations yet!</span>
+                    <span>You have no transaction yet!</span>
                     }
                 </Grid>
             </div>
