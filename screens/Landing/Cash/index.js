@@ -17,24 +17,25 @@ import * as billingAction from "../../../actions/billing"
 import {Alert, Spinner} from "kodobe-react-components";
 
 
-const Cash = ( props) => {
+const Cash = (props) => {
     const router = useRouter();
     const [balance, setBalance] = useState(0);
     const [loading, setLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
     const [cashoutProviders, setCashoutProviders] = useState([]);
     const [topupProviders, setTopupProviders] = useState([]);
+    const [wallet, setWallet] = useState({});
     let userId = Cookies.get("userId");
     const user = JSON.parse(Cookies.get("user"));
-    if(!userId){
+    if (!userId) {
         userId = user.userId
     }
 
     useEffect(() => {
-        console.log("props?.clientLedger?.id ",props?.clientLedger?.id );
-        getUserWallet( props?.clientLedger?.id || userId).catch(console.error);
-        getUserWalletTransactions(  props?.clientLedger?.id || userId).catch(console.error);
-        handlePaymentProvider(  props?.clientLedger?.id || userId).catch(console.error);
+        console.log("props?.clientLedger?.id ", props?.clientLedger?.id);
+        getUserWallet(props?.clientLedger?.id || userId).catch(console.error);
+        getUserWalletTransactions(props?.clientLedger?.id || userId).catch(console.error);
+        handlePaymentProvider(props?.clientLedger?.id || userId).catch(console.error);
     }, [])
 
 
@@ -42,6 +43,7 @@ const Cash = ( props) => {
         const {error, data} = await billingAction.getWallet(props.baseURL, ledgerId, userId)
         if (error) return Alert.showError({content: error});
         setBalance(data?._embedded?.wallets?.[0]?.balance || 0)
+        setWallet(data?._embedded?.wallets?.[0] || {})
         setLoading(false)
 
     };
@@ -53,8 +55,8 @@ const Cash = ( props) => {
 
         console.log(data._embedded?.paymentProviders, 'payament provider')
 
-        setCashoutProviders(data._embedded?.paymentProviders?.filter(provider => provider.providerType === "CASH_OUT"))
-        setTopupProviders(data._embedded?.paymentProviders?.filter(provider => provider.providerType === "PAYMENT"))
+        setCashoutProviders(data._embedded?.paymentProviders?.filter(provider => provider.providerType === "CASH_OUT") || [])
+        setTopupProviders(data._embedded?.paymentProviders?.filter(provider => provider.providerType === "PAYMENT") || [])
 
         setLoading(false)
 
@@ -112,27 +114,30 @@ const Cash = ( props) => {
                         <>
                             {
                                 cashoutProviders.length ?
-                                <Button
-                                    text={"Cashout"}
-                                    size="sm"
-                                    bgColor={["primary", "main"]}
-                                    border={["transparent", "primary"]}
-                                    color={["primary", "white"]}
-                                    type="button"
-                                    onClick={() => router.push({pathname: "cashout", query: {ledgerId: props?.clientLedger?.id}})}
-                                /> : ""
+                                    <Button
+                                        text={"Cashout"}
+                                        size="sm"
+                                        bgColor={["primary", "main"]}
+                                        border={["transparent", "primary"]}
+                                        color={["primary", "white"]}
+                                        type="button"
+                                        onClick={() => router.push({
+                                            pathname: "cashout",
+                                            query: {ledger: props?.clientLedger?.id, provider: cashoutProviders?.id, wallet: wallet?.id}
+                                        })}
+                                    /> : ""
                             }
                             {
                                 topupProviders.length ?
-                                <Button
-                                    text={"Top Up"}
-                                    size="sm"
-                                    bgColor={["primary", "main"]}
-                                    border={["transparent", "primary"]}
-                                    color={["primary", "white"]}
-                                    type="button"
-                                    onClick={() => router.push("/topup")}
-                                />
+                                    <Button
+                                        text={"Top Up"}
+                                        size="sm"
+                                        bgColor={["primary", "main"]}
+                                        border={["transparent", "primary"]}
+                                        color={["primary", "white"]}
+                                        type="button"
+                                        onClick={() => router.push("/topup")}
+                                    />
                                     : ""
                             }
                         </>
@@ -155,45 +160,45 @@ const Cash = ( props) => {
 
                 <Spacer height="20px"></Spacer>
                 <Grid gap="20px">
-                    {transactions.length?  transactions.map((transaction) => (
-                        <Container4 justifyContent="space-between" key={transaction.id}>
-                            <Flex direction="column" width="auto" alignItems="flex-start">
-                                <Span
-                                    color={["primary", "main", theme]}
-                                    size="font16"
-                                    lineHeight="lineHeight19"
-                                    size="font16"
-                                    lineHeight="lineHeight19"
-                                    weight="fontWeightNormal"
-                                    fontFamily="sagoeBold"
-                                >
-                                    {transaction.narration.substring(0,30) + "..."}
-                                </Span>
-                                <Small
-                                    color={["primary", "main", theme]}
-                                    size="font14"
-                                    lineHeight="lineHeight16"
-                                    weight="fontWeightNormal"
-                                    fontFamily="sagoe"
-                                >
-                                    {transaction.createdAt}
-                                </Small>
-                            </Flex>
+                    {transactions.length ? transactions.map((transaction) => (
+                            <Container4 justifyContent="space-between" key={transaction.id}>
+                                <Flex direction="column" width="auto" alignItems="flex-start">
+                                    <Span
+                                        color={["primary", "main", theme]}
+                                        size="font16"
+                                        lineHeight="lineHeight19"
+                                        size="font16"
+                                        lineHeight="lineHeight19"
+                                        weight="fontWeightNormal"
+                                        fontFamily="sagoeBold"
+                                    >
+                                        {transaction.narration.substring(0, 30) + "..."}
+                                    </Span>
+                                    <Small
+                                        color={["primary", "main", theme]}
+                                        size="font14"
+                                        lineHeight="lineHeight16"
+                                        weight="fontWeightNormal"
+                                        fontFamily="sagoe"
+                                    >
+                                        {transaction.createdAt}
+                                    </Small>
+                                </Flex>
 
-                            <Flex width="auto">
-                                <Span
-                                    color={["primary", "main", theme]}
-                                    size="font16"
-                                    lineHeight="lineHeight19"
-                                    weight="fontWeightNormal"
-                                    fontFamily="sagoeBold"
-                                >
-                                    {transaction.creditAmount ? "+" + (transaction.creditAmount/100) : "-" + (transaction.debitAmount/100)}
-                                </Span>
-                            </Flex>
-                        </Container4>
-                    )) :
-                    <span>You have not transcations yet!</span>
+                                <Flex width="auto">
+                                    <Span
+                                        color={["primary", "main", theme]}
+                                        size="font16"
+                                        lineHeight="lineHeight19"
+                                        weight="fontWeightNormal"
+                                        fontFamily="sagoeBold"
+                                    >
+                                        {transaction.creditAmount ? "+" + (transaction.creditAmount / 100) : "-" + (transaction.debitAmount / 100)}
+                                    </Span>
+                                </Flex>
+                            </Container4>
+                        )) :
+                        <span>You have no transaction yet!</span>
                     }
                 </Grid>
             </div>
