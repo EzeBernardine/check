@@ -9,20 +9,48 @@ import {Cards} from "../screens/CashoutMethods/Card/styles";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import Nav from '../components/Nav'
+import React, {useEffect, useState} from "react";
+import * as billingAction from "../actions/billing";
+import {Alert, Spinner} from "kodobe-react-components";
+import withAuth from "../components/withAuth";
 
-export default function Cashout(props) {
+const  Cashout = (props) =>  {
     const router = useRouter();
-    console.log("Cashout Props", props)
-    const methods = [
-        {
-            name: "Airtime",
-            click: () => window.location.href = "/airtime", //i am using this so i can get the props in airtime,
-        },
-        {
-            name: "Cash Withdrawal",
-            click: () => window.location.href = "/withdrawal", //i am using this so i can get the props in withdrawals
-        },
-    ];
+    const [loading, setLoading] = useState(true);
+    const [providers, setProviders] = useState([]);
+    console.log("Router", router.query)
+    useEffect(() => {
+        if(!props?.router?.query.ledger){
+            return router.push("/");
+        }
+
+        handlePaymentProvider(props?.router?.query.ledgerId)
+        //get wallet
+    }, [])
+
+    const handlePaymentProvider = async (ledgerId) => {
+        const {error, data} = await billingAction.getPaymentProviderByQuery(props.baseURL, {clientLedgerId: ledgerId, providerType: "CASH_OUT"})
+        if (error) {
+            Alert.showError({content: error});
+            return router.push("/");
+        }
+        const providers = data._embedded?.paymentProviders || [];
+        if (!providers?.length){
+            Alert.showError({content: "Cash-out is not supported for this method"});
+            return router.push("/");
+        }
+        setProviders(data._embedded?.paymentProviders || [])
+        setLoading(false)
+
+    };
+
+    if (loading) {
+        return (
+            <Flex className="center">
+                <Spinner/>
+            </Flex>
+        );
+    }
     return (
         <>
             <Container>
@@ -39,11 +67,14 @@ export default function Cashout(props) {
                 </Header3>
                 <Spacer height="20px"></Spacer>
                 <Grid gap="20px">
-                    {methods.map((method) => (
+                    {providers.map((provider) => (
                         <Cards
                             justifyContent="space-between"
-                            key={method.name}
-                            onClick={() => method.click()}
+                            key={provider.id}
+                            onClick={() => router.push({
+                                pathname: "disburse",
+                                query: {ledger: props?.router?.query.ledger, provider: provider?.id}
+                            })}
                         >
                             <Flex direction="column" width="auto" alignItems="flex-start">
                                 <Span
@@ -53,7 +84,7 @@ export default function Cashout(props) {
                                     weight="fontWeightNormal"
                                     fontFamily="sagoeBold"
                                 >
-                                    {method.name}
+                                    {provider.label}
                                 </Span>
                             </Flex>
                         </Cards>
@@ -63,3 +94,5 @@ export default function Cashout(props) {
         </>
     );
 }
+
+export default withAuth(Cashout);

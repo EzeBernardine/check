@@ -53,7 +53,7 @@ const OtherItems = (props) => {
                 Other Items
             </Header1>
 
-            <Modal show={invoiceId.length > 0} title='Redemption Code' handleClose={() => setInvoiceId('')}>
+            <Modal show={invoiceId?.length > 0} title='Redemption Code' handleClose={() => setInvoiceId('')}>
                 <Flex>
                     <Span
                         color={["grey", "0", theme]}
@@ -72,7 +72,7 @@ const OtherItems = (props) => {
 
             <div>
                 <Grid gap="20px">
-                    {invoices.length ? invoices.map((invoice) => (
+                    {invoices?.length ? invoices.map((invoice) => (
                         <Container4 justifyContent="space-between" key={invoice.id}>
                             <Flex width="auto" alignItems="center" justifyContent='flex-start' wrap='nowrap'>
                                 <Frame

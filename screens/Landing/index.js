@@ -11,9 +11,9 @@ import { Flex } from "../../components/Box/styles";
 import { UseContext } from "../../lib/context";
 
 const Header = (props) => {
-    const [clientLedgers, setCLientLedgers] = useState([])
-    const [clientLedger, setCLientLedger] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [clientLedgers, setClientLedgers] = useState([])
+    const [clientLedger, setClientLedger] = useState([])
+    const [loading, setLoading] = useState(true)
     const  { portalConfig: { mainColor } } = UseContext()
 
 
@@ -22,14 +22,14 @@ const Header = (props) => {
         const  handleGetClientLedgers = async () => {
             setLoading(true)
             const {data, error} = await getClientLedgers(props?.baseURL)
-            if(data) setCLientLedgers(data?._embedded?.clientLedgers);
+            if(data) setClientLedgers(data?._embedded?.clientLedgers);
             if(error) Alert.showError({content: error});
             setLoading(false)
         }
         handleGetClientLedgers()
     }, [])
 
-   
+
 
   return (
     <Container>
@@ -39,7 +39,7 @@ const Header = (props) => {
              :
                 clientLedgers?.length ?  
                     <Tabs
-                        click={(tab) => setCLientLedger(tab)}
+                        click={(tab) => setClientLedger(tab)}
                         nonActiveColor={ mainColor || "#063159"}
                         nonActivebgColor={ mainColor || "#063159"}
                         activeColor={"white"}
