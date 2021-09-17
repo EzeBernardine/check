@@ -9,28 +9,14 @@ import App from "next/app";
 import Head from 'next/head'
 import {useEffect} from "react";
 import qs from "query-string";
-<<<<<<< HEAD
-import {redirectToLogin} from '../lib/utils'
-=======
 import Layout from '../components/Layout'
 import { redirectToLogin } from '../lib/utils'
->>>>>>> feature/portal-customization
 
 
 function MyApp({Component, pageProps, ...rest}) {
     const router = useRouter();
     const {baseURL, authURL} = rest;
 
-<<<<<<< HEAD
-    // useEffect(() => {
-    // console.log("Here", router);
-    // if (!router.query.clientId && router.pathname !== "/404") {
-    //     // window.location.href = window.location.origin + "/404";
-    //     return router.push("/404");
-    // }
-    // }, [])
-=======
->>>>>>> feature/portal-customization
 
     console.log("Version: 13", process.env);
     const inFiveMinutes = new Date(new Date().getTime() + 5 * 60 * 1000);
@@ -38,8 +24,6 @@ function MyApp({Component, pageProps, ...rest}) {
         // Cookies.set(key, router.query[key], {expires: inFiveMinutes})
         Cookies.set(key, router.query[key], {expires: 1})
     }
-<<<<<<< HEAD
-=======
     Cookies.set("clientId", router.query["client-id"])
 
     useEffect(() => {
@@ -64,7 +48,6 @@ function MyApp({Component, pageProps, ...rest}) {
 
         }
 
->>>>>>> feature/portal-customization
     return (
         <>
             <ThemeProvider theme={theme}>
