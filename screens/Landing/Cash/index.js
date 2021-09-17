@@ -48,7 +48,6 @@ const Cash = ( props) => {
         if (error) return Alert.showError({content: error});
         // setBalance(data?._embedded?.wallets?.[0]?.balance || 0)
 
-        console.log(data._embedded?.paymentProviders, 'payament provider')
         setLoading(false)
 
     };

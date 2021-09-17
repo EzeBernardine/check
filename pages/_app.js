@@ -35,17 +35,17 @@ function MyApp({Component, pageProps, ...rest}) {
       }, []);
 
       const getClientInfo = async () => {
-        const tokenStore = "KCLI_token";
+        const clientID = "client-id";
         const query = qs.parse(window.location.search);
-          if (!query["auth-token"]) {
-              let localData = localStorage.getItem(tokenStore);
-              console.log(localData, 'localData')
-              if (!localData) {
-              redirectToLogin(authURL);
-              return;
-              }
+            if (!query["auth-token"]) {
+                let localData = localStorage.getItem(clientID);
+                console.log(localData, 'localData')
+                if (!localData) {
+                    redirectToLogin(authURL);
+                    return;
+                }
 
-          }
+            }
             // check if token is still valid
             const {data, error} = await auth(baseURL)
             .catch((err) => redirectToLogin(authUrl));
