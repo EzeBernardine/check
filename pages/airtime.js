@@ -10,9 +10,7 @@ import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import * as tpsAction from "../actions/tps";
 import {Alert} from "kodobe-react-components";
- 
 import {useRouter} from "next/router";
- 
 import Nav from '../components/Nav'
  
 
@@ -33,7 +31,6 @@ export default function Airtime(props) {
 
     const getAllSupportedNetworks = async () => {
         const {error, data} = await tpsAction.airtime.getNetworks(props.baseURL);
-        console.log("getAllSupportedNetworks", error, data);
         if (error) {
             Alert.showError({content: error});
             return router.push("/");
@@ -43,10 +40,6 @@ export default function Airtime(props) {
     };
     const handleChange = (e) => {
         e.preventDefault();
-        console.log("Airtime", {
-            ...airtimePayload,
-            [e.target.name]: e.target.value,
-        });
         setAirtimePayload({
             ...airtimePayload,
             [e.target.name]: e.target.value,
@@ -63,7 +56,7 @@ export default function Airtime(props) {
         }
 
         const {error: transferAuthError, data: transferAuthData} = await tpsAction.transferAuth.createTransferAuth(props.baseURL, "airtime", airtimePayload);
-        console.log("transferAuth", transferAuthError, transferAuthData)
+        // console.log("transferAuth", transferAuthError, transferAuthData)
         if (transferAuthError) {
             setLoading(false)
             return Alert.showError({content: "Oops! We are unable to complete your airtime purchase"});
@@ -73,7 +66,7 @@ export default function Airtime(props) {
         airtimePayload.transferAuthId = transferAuthData.transferAuthId;
         airtimePayload.clientLedgerId = Cookies.get("ledgerId");
         const {error, data} = await tpsAction.airtime.buyAirtime(props.baseURL, airtimePayload);
-        console.log("buyAirtime", error, data)
+        // console.log("buyAirtime", error, data)
 
         if (error) {
             setLoading(false)
@@ -83,7 +76,7 @@ export default function Airtime(props) {
         Alert.showSuccess({content: "Your airtime purchase is successful."})
     }
     return (
-        <Layout>
+        <>
             <Container1>
                 <Nav navItems={[{name: 'Home /', href: '/'}, {name: 'Cashout', href: '/cashout'} ]}/>
 
@@ -160,6 +153,6 @@ export default function Airtime(props) {
                     </FormContainer>
                 </Container2>
             </Container1>
-        </Layout>
+        </>
     );
 }

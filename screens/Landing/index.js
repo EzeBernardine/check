@@ -7,6 +7,8 @@ import {getClientLedgers } from '../../actions/billing'
 import {Alert, Spinner} from "kodobe-react-components";
 import { useEffect, useState } from "react";
 import { generateID } from "../../lib/generateID";
+import { Flex } from "../../components/Box/styles";
+import { UseContext } from "../../lib/context";
 
 const Header = (props) => {
     const [clientLedgers, setClientLedgers] = useState([])
@@ -18,13 +20,8 @@ const Header = (props) => {
         const  handleGetClientLedgers = async () => {
             setLoading(true)
             const {data, error} = await getClientLedgers(props?.baseURL)
-            if(data){
-                setClientLedgers(data?._embedded?.clientLedgers || [])
-                // setClientLedger(data?._embedded?.clientLedgers[0])
-            }
-            if(error){
-                Alert.showError({content: error});
-            }
+            if(data) setCLientLedgers(data?._embedded?.clientLedgers);
+            if(error) Alert.showError({content: error});
             setLoading(false)
         }
         handleGetClientLedgers()
@@ -55,10 +52,8 @@ const Header = (props) => {
             : null
         }
 
-        <div label="Other Items" value=''>
-          <OtherItems {...props}  />
-        </div>
-      </Tabs>
+
+  
     </Container>
   );
 };

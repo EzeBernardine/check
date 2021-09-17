@@ -15,6 +15,7 @@ const Tabs = ({
   children,
   nonActiveColor,
   activeColor,
+  nonActivebgColor,
   bgColor,
   full,
 }) => {
@@ -52,6 +53,7 @@ const Tabs = ({
               label={label?.label }
               nonActiveColor={nonActiveColor}
               activeColor={activeColor}
+              nonActivebgColor={nonActivebgColor}
               full={full}
               onClick={(tab) => onClickTabItem(tab, idx)}
             />

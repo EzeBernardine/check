@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const Header1 = styled.h1`
-  font-family: ${({ theme, fontFamily }) =>
-    theme.typography.fontFamily[fontFamily]};
+  /* font-family: ${({ theme, fontFamily }) => theme.typography.fontFamily[fontFamily]}; */
   font-weight: ${({ theme, weight }) => theme.typography[weight]};
   line-height: ${({ lineHeight, theme }) =>
     theme.typography.lineHeight[lineHeight]};
@@ -13,8 +12,7 @@ export const Header1 = styled.h1`
 `;
 
 export const Header2 = styled.h2`
-  font-family: ${({ theme, fontFamily }) =>
-    theme.typography.fontFamily[fontFamily]};
+  /* font-family: ${({ theme, fontFamily }) => theme.typography.fontFamily[fontFamily]}; */
   font-weight: ${({ theme, weight }) => theme.typography[weight]};
   line-height: ${({ lineHeight, theme }) =>
     theme.typography.lineHeight[lineHeight]};
@@ -25,8 +23,7 @@ export const Header2 = styled.h2`
 `;
 
 export const Header3 = styled.h3`
-  font-family: ${({ theme, fontFamily }) =>
-    theme.typography.fontFamily[fontFamily]};
+  /* font-family: ${({ theme, fontFamily }) => theme.typography.fontFamily[fontFamily]}; */
   font-weight: ${({ theme, weight }) => theme.typography[weight]};
   line-height: ${({ lineHeight, theme }) =>
     theme.typography.lineHeight[lineHeight]};
@@ -37,8 +34,7 @@ export const Header3 = styled.h3`
 `;
 
 export const Header4 = styled.h4`
-  font-family: ${({ theme, fontFamily }) =>
-    theme.typography.fontFamily[fontFamily]};
+  /* font-family: ${({ theme, fontFamily }) => theme.typography.fontFamily[fontFamily]}; */
   font-weight: ${({ theme, weight }) => theme.typography[weight]};
   line-height: ${({ lineHeight, theme }) =>
     theme.typography.lineHeight[lineHeight]};
@@ -49,8 +45,7 @@ export const Header4 = styled.h4`
 `;
 
 export const Header5 = styled.h5`
-  font-family: ${({ theme, fontFamily }) =>
-    theme.typography.fontFamily[fontFamily]};
+  /* font-family: ${({ theme, fontFamily }) => theme.typography.fontFamily[fontFamily]}; */
   font-weight: ${({ theme, weight }) => theme.typography[weight]};
   line-height: ${({ lineHeight, theme }) =>
     theme.typography.lineHeight[lineHeight]};
@@ -61,8 +56,7 @@ export const Header5 = styled.h5`
 `;
 
 export const Paragraph = styled.p`
-  font-family: ${({ theme, fontFamily }) =>
-    theme.typography.fontFamily[fontFamily]};
+  /* font-family: ${({ theme, fontFamily }) => theme.typography.fontFamily[fontFamily]}; */
   font-weight: ${({ theme, weight }) => theme.typography[weight]};
   line-height: ${({ lineHeight, theme }) =>
     theme.typography.lineHeight[lineHeight]};
@@ -72,8 +66,7 @@ export const Paragraph = styled.p`
   font-size: ${({ size, theme }) => theme.fontSizes[size]};
 `;
 export const Bold = styled.b`
-  font-family: ${({ theme, fontFamily }) =>
-    theme.typography.fontFamily[fontFamily]};
+  /* font-family: ${({ theme, fontFamily }) => theme.typography.fontFamily[fontFamily]}; */
   font-weight: ${({ theme, weight }) => theme.typography[weight]};
   line-height: ${({ lineHeight, theme }) =>
     theme.typography.lineHeight[lineHeight]};
@@ -85,8 +78,7 @@ export const Bold = styled.b`
 `;
 
 export const Span = styled.span`
-  font-family: ${({ theme, fontFamily }) =>
-    theme.typography.fontFamily[fontFamily]};
+  /* font-family: ${({ theme, fontFamily }) => theme.typography.fontFamily[fontFamily]}; */
   font-weight: ${({ theme, weight }) => theme.typography[weight]};
   line-height: ${({ lineHeight, theme }) =>
     theme.typography.lineHeight[lineHeight]};
@@ -97,8 +89,7 @@ export const Span = styled.span`
 `;
 
 export const Small = styled.small`
-  font-family: ${({ theme, fontFamily }) =>
-    theme.typography.fontFamily[fontFamily]};
+  /* font-family: ${({ theme, fontFamily }) => theme.typography.fontFamily[fontFamily]}; */
   font-weight: ${({ theme, weight }) => theme.typography[weight]};
   line-height: ${({ lineHeight, theme }) =>
     theme.typography.lineHeight[lineHeight]};
@@ -109,8 +100,7 @@ export const Small = styled.small`
 `;
 
 export const Sub = styled.sub`
-  font-family: ${({ theme, fontFamily }) =>
-    theme.typography.fontFamily[fontFamily]};
+  /* font-family: ${({ theme, fontFamily }) => theme.typography.fontFamily[fontFamily]}; */
   font-weight: ${({ theme, weight }) => theme.typography[weight]};
   line-height: ${({ lineHeight, theme }) =>
     theme.typography.lineHeight[lineHeight]};
@@ -121,8 +111,7 @@ export const Sub = styled.sub`
 `;
 
 export const Anchor = styled.a`
-  font-family: ${({ theme, fontFamily }) =>
-    theme.typography.fontFamily[fontFamily]};
+  /* font-family: ${({ theme, fontFamily }) => theme.typography.fontFamily[fontFamily]}; */
   font-weight: ${({ theme, weight }) => theme.typography[weight]};
   line-height: ${({ lineHeight, theme }) =>
     theme.typography.lineHeight[lineHeight]};
@@ -132,8 +121,7 @@ export const Anchor = styled.a`
   font-size: ${({ size, theme }) => theme.fontSizes[size]};
 `;
 export const ListItem = styled.li`
-  font-family: ${({ theme, fontFamily }) =>
-    theme.typography.fontFamily[fontFamily]};
+  /* font-family: ${({ theme, fontFamily }) => theme.typography.fontFamily[fontFamily]}; */
   font-weight: ${({ theme, weight }) => theme.typography[weight]};
   line-height: ${({ lineHeight, theme }) =>
     theme.typography.lineHeight[lineHeight]};
@@ -143,8 +131,7 @@ export const ListItem = styled.li`
   font-size: ${({ size, theme }) => theme.fontSizes[size]};
 `;
 export const Italics = styled.i`
-  font-family: ${({ theme, fontFamily }) =>
-    theme.typography.fontFamily[fontFamily]};
+  /* font-family: ${({ theme, fontFamily }) => theme.typography.fontFamily[fontFamily]}; */
   font-weight: ${({ theme, weight }) => theme.typography[weight]};
   line-height: ${({ lineHeight, theme }) =>
     theme.typography.lineHeight[lineHeight]};

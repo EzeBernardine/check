@@ -1,20 +1,27 @@
 import {ThemeProvider} from "styled-components";
-import {ProviderContext} from "../lib/context";
+import {ProviderContext, UseContext} from "../lib/context";
 import {theme} from "../config/theme";
 import "../styles/globals.css";
 import Cookies from 'js-cookie'
 import {useRouter} from "next/router";
 import {auth} from '../actions/auth'
 import App from "next/app";
+import Head from 'next/head'
 import {useEffect} from "react";
 import qs from "query-string";
+<<<<<<< HEAD
 import {redirectToLogin} from '../lib/utils'
+=======
+import Layout from '../components/Layout'
+import { redirectToLogin } from '../lib/utils'
+>>>>>>> feature/portal-customization
 
 
 function MyApp({Component, pageProps, ...rest}) {
     const router = useRouter();
-    const {baseURL, authURL} = rest
+    const {baseURL, authURL} = rest;
 
+<<<<<<< HEAD
     // useEffect(() => {
     // console.log("Here", router);
     // if (!router.query.clientId && router.pathname !== "/404") {
@@ -22,6 +29,8 @@ function MyApp({Component, pageProps, ...rest}) {
     //     return router.push("/404");
     // }
     // }, [])
+=======
+>>>>>>> feature/portal-customization
 
     console.log("Version: 13", process.env);
     const inFiveMinutes = new Date(new Date().getTime() + 5 * 60 * 1000);
@@ -29,12 +38,43 @@ function MyApp({Component, pageProps, ...rest}) {
         // Cookies.set(key, router.query[key], {expires: inFiveMinutes})
         Cookies.set(key, router.query[key], {expires: 1})
     }
+<<<<<<< HEAD
+=======
+    Cookies.set("clientId", router.query["client-id"])
+
+    useEffect(() => {
+        getClientInfo();
+      }, []);
+
+      const getClientInfo = async () => {
+        const clientID = "client-id";
+        const query = qs.parse(window.location.search);
+            if (!query["auth-token"]) {
+                let localData = localStorage.getItem(clientID);
+                console.log(localData, 'localData')
+                if (!localData) {
+                    redirectToLogin(authURL);
+                    return;
+                }
+
+            }
+            // check if token is still valid
+            const {data, error} = await auth(baseURL)
+            .catch((err) => redirectToLogin(authUrl));
+
+        }
+
+>>>>>>> feature/portal-customization
     return (
-        <ThemeProvider theme={theme}>
-            <ProviderContext>
-                <Component {...pageProps} {...rest} />
-            </ProviderContext>
-        </ThemeProvider>
+        <>
+            <ThemeProvider theme={theme}>
+                <ProviderContext>
+                    <Layout>
+                        <Component {...pageProps} {...rest} />
+                    </Layout>
+                </ProviderContext>
+            </ThemeProvider>
+        </>
     );
 }
 

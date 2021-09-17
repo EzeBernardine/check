@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const TabWrapper = styled("div")``;
 
 export const TabList = styled("ol")`
-  font-family: ${({ theme }) => theme.typography.fontFamily};
+  /* font-family: ${({ theme }) => theme.typography.fontFamily}; */
   padding-left: 0;
   display: flex;
   width: 100%;
@@ -68,8 +68,8 @@ export const ListItem = styled("li")`
         ? theme.palette.common.white
         : "#de8430"};
 
-    background-color: ${({ nonActiveColor, theme }) =>
-      !nonActiveColor ? !nonActiveColor : theme.palette.primary["main"]};
+    background-color: ${({ nonActiveColor, theme ,nonActivebgColor}) =>
+      !nonActiveColor ? !nonActiveColor : nonActivebgColor || theme.palette.primary["main"]};
     ::before {
       background: ${({ activeColor, theme }) =>
         activeColor

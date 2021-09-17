@@ -15,6 +15,7 @@ import {Flex, Grid} from "../../../components/Box/styles";
 
 import * as billingAction from "../../../actions/billing"
 import {Alert, Spinner} from "kodobe-react-components";
+import { UseContext } from "../../../lib/context";
 
 
 const Cash = (props) => {
@@ -22,9 +23,15 @@ const Cash = (props) => {
     const [balance, setBalance] = useState(0);
     const [loading, setLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
+<<<<<<< HEAD
     const [cashoutProviders, setCashoutProviders] = useState([]);
     const [topupProviders, setTopupProviders] = useState([]);
     const [wallet, setWallet] = useState({});
+=======
+
+    const  { portalConfig: { mainColor } } = UseContext()
+
+>>>>>>> feature/portal-customization
     let userId = Cookies.get("userId");
     const user = JSON.parse(Cookies.get("user"));
     if (!userId) {
@@ -53,11 +60,14 @@ const Cash = (props) => {
         if (error) return Alert.showError({content: error});
         // setBalance(data?._embedded?.wallets?.[0]?.balance || 0)
 
+<<<<<<< HEAD
         console.log(data._embedded?.paymentProviders, 'payament provider')
 
         setCashoutProviders(data._embedded?.paymentProviders?.filter(provider => provider.providerType === "CASH_OUT") || [])
         setTopupProviders(data._embedded?.paymentProviders?.filter(provider => provider.providerType === "PAYMENT") || [])
 
+=======
+>>>>>>> feature/portal-customization
         setLoading(false)
 
     };
@@ -111,6 +121,7 @@ const Cash = (props) => {
                 <Spacer height="10px"></Spacer>
                 <Flex>
                     {
+<<<<<<< HEAD
                         <>
                             {
                                 cashoutProviders.length ?
@@ -140,6 +151,48 @@ const Cash = (props) => {
                                     />
                                     : ""
                             }
+=======
+                        props?.clientLedger?.status === 'topup' ?
+                        <Button
+                            text={"Top Up"}
+                            size="sm"
+                            bgColor={'red'}
+                            border={mainColor}
+                            color={["primary", "white"]}
+                            type="button"
+                            onClick={() => router.push("/topup")}
+                        />                       
+                       :  props?.clientLedger?.status === 'cashout' ?
+                         <Button
+                             text={"Cashout"}
+                             size="sm"
+                             bgColor={mainColor}
+                             border={["transparent", "primary"]}
+                             color={["primary", "white"]}
+                             type="button"
+                             onClick={() => router.push("/cashout")}
+                         />
+                        : 
+                        <>
+                            <Button
+                             text={"Cashout"}
+                             size="sm"
+                             bgColor={mainColor}
+                             border={["transparent", "primary"]}
+                             color={["primary", "white"]}
+                             type="button"
+                             onClick={() => router.push("/cashout")}
+                         />
+                            <Button
+                            text={"Top Up"}
+                            size="sm"
+                            bgColor={mainColor}
+                            border={["transparent", "primary"]}
+                            color={["primary", "white"]}
+                            type="button"
+                            onClick={() => router.push("/topup")}
+                        />  
+>>>>>>> feature/portal-customization
                         </>
                     }
                 </Flex>

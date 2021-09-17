@@ -52,7 +52,7 @@ const  Cashout = (props) =>  {
         );
     }
     return (
-        <Layout>
+        <>
             <Container>
                 <Nav navItems={[{name: 'Home', href: '/'}]}/>
 
@@ -91,7 +91,7 @@ const  Cashout = (props) =>  {
                     ))}
                 </Grid>
             </Container>
-        </Layout>
+        </>
     );
 }
 

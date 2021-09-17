@@ -13,7 +13,7 @@ export const errorHandler = (err: any, defaulted: boolean = false) => {
         return "Ops!, an error occurred.";
     }
 
-    console.log("Error", err.response?.data?.error);
+    // console.log("Error", err.response?.data?.error);
     let messageString = "";
     if (!err.response) {
         messageString += "Network error! check your network and try again";
@@ -28,7 +28,7 @@ export const errorHandler = (err: any, defaulted: boolean = false) => {
         messageString = loopObj(data);
     }
 
-    console.log("Message", messageString, messageString.replace(/{|}|'|\[|\]/g, ""));
+    // console.log("Message", messageString, messageString.replace(/{|}|'|\[|\]/g, ""));
     return messageString.replace(/{|}|'|\[|\]/g, "");
 };
 

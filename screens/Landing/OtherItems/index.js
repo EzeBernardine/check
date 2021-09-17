@@ -6,7 +6,6 @@ import {theme} from "../../../config/theme";
 import {Alert, Spinner} from "kodobe-react-components";
 import {Spacer} from "../../../components/Spacer/styles";
 import {Flex, Frame, Grid} from "../../../components/Box/styles";
-import {generateID} from "../../../lib/generateID";
 import * as invoicingAction from "../../../actions/invoice";
 import Modal from '../../../components/Modal'
 
@@ -27,7 +26,6 @@ const OtherItems = (props) => {
             const {error, data} = await invoicingAction.getInvoices(props.baseURL, userId)
             if (error) return Alert.showError({content: error});
             setInvoices(data.data)
-            console.log("getInvoices", error, data.data);
             setLoading(false)
 
         };
@@ -55,12 +53,12 @@ const OtherItems = (props) => {
                 Other Items
             </Header1>
 
-            <Modal show={invoiceId} title='Redemption Code' handleClose={() => setInvoiceId(null)}>
+            <Modal show={invoiceId.length > 0} title='Redemption Code' handleClose={() => setInvoiceId('')}>
                 <Flex>
                     <Span
                         color={["grey", "0", theme]}
-                        size="font16"
-                        lineHeight="lineHeight16"
+                        size="font28"
+                        lineHeight="lineHeight30"
                         weight="fontWeightMedium"
                         fontFamily="sagoe"
                         center
@@ -107,20 +105,11 @@ const OtherItems = (props) => {
                             <Flex width="auto">
                                 {
                                     invoice?.status === 'PAID' ?
-                                        <Button
-                                            text={"Submit"}
-                                            type="button"
-                                            onClick={() => []}
-                                        >
+                                        <Button text={"Submit"} type="button" onClick={() => []}>
                                             Completed
                                         </Button>
                                         : invoice?.status === 'UNPAID' ?
-                                            <Button
-                                                text={"Submit"}
-                                                className='unpaid'
-                                                type="button"
-                                                onClick={() => []}
-                                            >
+                                            <Button text={"Submit"} className='unpaid' type="button" onClick={() => []}>
                                                 Pending
                                             </Button>
                                             : null

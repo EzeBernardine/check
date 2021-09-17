@@ -99,7 +99,7 @@ export default function Withdrawal(props) {
     };
 
     return (
-        <Layout>
+        <>
             <Container3>
                 <Nav navItems={[{name: 'Home /', href: '/'}, {name: 'Cashout', href: '/cashout'} ]}/>
 
@@ -200,6 +200,6 @@ export default function Withdrawal(props) {
                     </FormContainer>
                 </Container4>
             </Container3>
-        </Layout>
+        </>
     );
 }
