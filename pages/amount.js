@@ -72,7 +72,7 @@ export default function Amount() {
       }, [initiate, paymentData.amount, paymentData.reference]);
 
     return (
-        <Layout>
+        <>
             <Container1>
                 <Nav navItems={[{name: 'Home /', href: '/'}, {name: 'Cashout', href: '/cashout'} ]}/>
 
@@ -132,7 +132,7 @@ export default function Amount() {
                     </FormContainer>
                 </Container2>
             </Container1>
-        </Layout>
+        </>
     );
 }
 

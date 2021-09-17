@@ -1,27 +1,22 @@
 import {ThemeProvider} from "styled-components";
-import {ProviderContext} from "../lib/context";
+import {ProviderContext, UseContext} from "../lib/context";
 import {theme} from "../config/theme";
 import "../styles/globals.css";
 import  Cookies from 'js-cookie'
 import {useRouter} from "next/router";
 import{auth} from '../actions/auth'
 import App from "next/app";
+import Head from 'next/head'
 import {useEffect} from "react";
 import qs from "query-string";
+import Layout from '../components/Layout'
 import { redirectToLogin } from '../lib/utils'
 
 
 function MyApp({Component, pageProps, ...rest}) {
     const router = useRouter();
-    const {baseURL, authURL} = rest
+    const {baseURL, authURL} = rest;
 
-    // useEffect(() => {
-        // console.log("Here", router);
-        // if (!router.query.clientId && router.pathname !== "/404") {
-        //     // window.location.href = window.location.origin + "/404";
-        //     return router.push("/404");
-        // }
-    // }, [])
 
     console.log("Version: 13", process.env);
     const inFiveMinutes = new Date(new Date().getTime() + 5 * 60 * 1000);
@@ -53,11 +48,15 @@ function MyApp({Component, pageProps, ...rest}) {
         }
 
     return (
-        <ThemeProvider theme={theme}>
-            <ProviderContext>
-                <Component {...pageProps} {...rest} />
-            </ProviderContext>
-        </ThemeProvider>
+        <>
+            <ThemeProvider theme={theme}>
+                <ProviderContext>
+                    <Layout>
+                        <Component {...pageProps} {...rest} />
+                    </Layout>
+                </ProviderContext>
+            </ThemeProvider>
+        </>
     );
 }
 

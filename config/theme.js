@@ -1,6 +1,11 @@
+
+
+ 
+
 const white = "#fff";
 const black = "#111";
 const transparent = "transparent";
+
 
 const palette = {
   common: {

@@ -24,7 +24,7 @@ export default function Cashout(props) {
         },
     ];
     return (
-        <Layout>
+        <>
             <Container>
                 <Nav navItems={[{name: 'Home', href: '/'}]}/>
 
@@ -60,6 +60,6 @@ export default function Cashout(props) {
                     ))}
                 </Grid>
             </Container>
-        </Layout>
+        </>
     );
 }

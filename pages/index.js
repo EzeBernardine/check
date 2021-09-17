@@ -1,12 +1,19 @@
 import Landing from "../screens/Landing";
 import Layout from "../components/Layout";
 
+
+
+
+
+
+
 export default function Home(props) {
+
     return (
         <div>
-            <Layout>
-                <Landing {...props} />
-            </Layout>
+            <>
+                <Landing {...props}  />
+            </>
         </div>
     );
 }

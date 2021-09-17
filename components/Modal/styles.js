@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { OverFlowScrollBar } from "../OverflowScroll/styles";
 
 export const Container = styled("div")`
-  font-family: ${({ theme }) => theme.typography.fontFamily};
+  /* font-family: ${({ theme }) => theme.typography.fontFamily}; */
   position: fixed;
   top: 0;
   left: 0;
@@ -77,7 +77,7 @@ export const Header = styled("div")`
   justify-content: center;
   align-items: center;
   font-weight: initial;
-  font-family: ${({ theme }) => theme.typography.fontFamily.sagoeBold};
+  /* font-family: ${({ theme }) => theme.typography.fontFamily.sagoeBold}; */
 `;
 
 export const Title = styled.h2`

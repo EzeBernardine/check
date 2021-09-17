@@ -21,7 +21,7 @@ export default function TopUp(props) {
   
     ];
     return (
-        <Layout>
+        <>
             <Container>
                 <Nav navItems={[{name: 'Home', href: '/'}]}/>
 
@@ -57,6 +57,6 @@ export default function TopUp(props) {
                     ))}
                 </Grid>
             </Container>
-        </Layout>
+        </>
     );
 }

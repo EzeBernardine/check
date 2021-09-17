@@ -7,7 +7,7 @@ import * as userAction from "../actions/user"
 
 const withAuth = (AuthComponent) => {
     const Wrapper = (props) => {
-        console.log("In Auth", props)
+        // console.log("In Auth", props)
         const {baseURL, authURL} = props
 
         const {query, ...router} = useRouter()
@@ -18,7 +18,7 @@ const withAuth = (AuthComponent) => {
         }, []);
 
         const checkIfUserAuth = async () => {
-            console.log("checkIfUserAuth", window.location)
+            // console.log("checkIfUserAuth", window.location)
 
             const token = getAuthenticationToken();
             if (!token) {
@@ -35,7 +35,7 @@ const withAuth = (AuthComponent) => {
             }
 
             const {error, data} = await userAction.me(baseURL);
-            console.log("Error", data, error);
+            // console.log("Error", data, error);
 
             if (error) {
                 console.log("Errror", error)
@@ -48,7 +48,7 @@ const withAuth = (AuthComponent) => {
 
                 url += `&redirect=${window.location.origin + window.location.pathname}`
 
-                console.log("URLLL", url, router.query);
+                // console.log("URLLL", url, router.query);
                 // return;
                 return router.push(url)
             }

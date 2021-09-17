@@ -76,7 +76,7 @@ export default function Airtime(props) {
         Alert.showSuccess({content: "Your airtime purchase is successful."})
     }
     return (
-        <Layout>
+        <>
             <Container1>
                 <Nav navItems={[{name: 'Home /', href: '/'}, {name: 'Cashout', href: '/cashout'} ]}/>
 
@@ -153,6 +153,6 @@ export default function Airtime(props) {
                     </FormContainer>
                 </Container2>
             </Container1>
-        </Layout>
+        </>
     );
 }

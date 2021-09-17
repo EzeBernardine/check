@@ -8,11 +8,15 @@ import {Alert, Spinner} from "kodobe-react-components";
 import { useEffect, useState } from "react";
 import { generateID } from "../../lib/generateID";
 import { Flex } from "../../components/Box/styles";
+import { UseContext } from "../../lib/context";
 
 const Header = (props) => {
     const [clientLedgers, setCLientLedgers] = useState([])
     const [clientLedger, setCLientLedger] = useState([])
     const [loading, setLoading] = useState(false)
+    // const {config: { portalConfig }} = UseContext()
+
+    // console.log(portalConfig, 'portalConfig')
 
 
     useEffect(() => {

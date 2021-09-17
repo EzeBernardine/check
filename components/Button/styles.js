@@ -59,7 +59,7 @@ const mobileVariantPadding = (size, hasIcon) => {
 };
 
 export const ButtonStyle = styled.button`
-  font-family: ${({ theme }) => theme.typography.fontFamily.robotoMedium};
+  /* font-family: ${({ theme }) => theme.typography.fontFamily.robotoMedium}; */
   position: relative;
   white-space: nowrap;
   display: flex;
