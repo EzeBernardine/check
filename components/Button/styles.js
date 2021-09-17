@@ -59,7 +59,6 @@ const mobileVariantPadding = (size, hasIcon) => {
 };
 
 export const ButtonStyle = styled.button`
-  /* font-family: ${({ theme }) => theme.typography.fontFamily.robotoMedium}; */
   position: relative;
   white-space: nowrap;
   display: flex;
@@ -67,9 +66,8 @@ export const ButtonStyle = styled.button`
   align-items: center;
   background: ${({ bgColor, isLoading, theme, disabled }) =>
     isLoading || disabled
-      ? theme.palette.grey[200]
-      : bgColor.length > 2
-      ? renderGradient(bgColor, theme)
+    ? theme.palette.grey[200]
+    : !Array.isArray(bgColor) ?  bgColor
       : renderBackgroundColor(bgColor, theme)};
   color: ${({ theme, color: [key, value], isLoading, disabled }) =>
     isLoading || disabled

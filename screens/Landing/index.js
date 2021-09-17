@@ -14,9 +14,8 @@ const Header = (props) => {
     const [clientLedgers, setCLientLedgers] = useState([])
     const [clientLedger, setCLientLedger] = useState([])
     const [loading, setLoading] = useState(false)
-    // const {config: { portalConfig }} = UseContext()
+    const  { portalConfig: { mainColor } } = UseContext()
 
-    // console.log(portalConfig, 'portalConfig')
 
 
     useEffect(() => {
@@ -36,12 +35,13 @@ const Header = (props) => {
     <Container>
          {
             loading ? 
-                <Flex style={{minWidth: '100%'}}><Spinner /> </Flex>   
+                <Flex style={{minWidth: '100%'}}><Spinner /></Flex>   
              :
                 clientLedgers?.length ?  
                     <Tabs
                         click={(tab) => setCLientLedger(tab)}
-                        nonActiveColor={"#063159"}
+                        nonActiveColor={ mainColor || "#063159"}
+                        nonActivebgColor={ mainColor || "#063159"}
                         activeColor={"white"}
                         bgColor={"transaparent"}
                         full
@@ -54,7 +54,6 @@ const Header = (props) => {
                                 )
                             )
                         }
-                
                         <div label="Other Items" value=''>
                             <OtherItems {...props}  />
                         </div>

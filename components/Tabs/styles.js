@@ -68,8 +68,8 @@ export const ListItem = styled("li")`
         ? theme.palette.common.white
         : "#de8430"};
 
-    background-color: ${({ nonActiveColor, theme }) =>
-      !nonActiveColor ? !nonActiveColor : theme.palette.primary["main"]};
+    background-color: ${({ nonActiveColor, theme ,nonActivebgColor}) =>
+      !nonActiveColor ? !nonActiveColor : nonActivebgColor || theme.palette.primary["main"]};
     ::before {
       background: ${({ activeColor, theme }) =>
         activeColor

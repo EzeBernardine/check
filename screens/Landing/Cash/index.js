@@ -15,6 +15,7 @@ import {Flex, Grid} from "../../../components/Box/styles";
 
 import * as billingAction from "../../../actions/billing"
 import {Alert, Spinner} from "kodobe-react-components";
+import { UseContext } from "../../../lib/context";
 
 
 const Cash = ( props) => {
@@ -22,6 +23,9 @@ const Cash = ( props) => {
     const [balance, setBalance] = useState(0);
     const [loading, setLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
+
+    const  { portalConfig: { mainColor } } = UseContext()
+
     let userId = Cookies.get("userId");
     const user = JSON.parse(Cookies.get("user"));
     if(!userId){
@@ -105,8 +109,8 @@ const Cash = ( props) => {
                         <Button
                             text={"Top Up"}
                             size="sm"
-                            bgColor={["primary", "main"]}
-                            border={["transparent", "primary"]}
+                            bgColor={'red'}
+                            border={mainColor}
                             color={["primary", "white"]}
                             type="button"
                             onClick={() => router.push("/topup")}
@@ -115,7 +119,7 @@ const Cash = ( props) => {
                          <Button
                              text={"Cashout"}
                              size="sm"
-                             bgColor={["primary", "main"]}
+                             bgColor={mainColor}
                              border={["transparent", "primary"]}
                              color={["primary", "white"]}
                              type="button"
@@ -126,7 +130,7 @@ const Cash = ( props) => {
                             <Button
                              text={"Cashout"}
                              size="sm"
-                             bgColor={["primary", "main"]}
+                             bgColor={mainColor}
                              border={["transparent", "primary"]}
                              color={["primary", "white"]}
                              type="button"
@@ -135,7 +139,7 @@ const Cash = ( props) => {
                             <Button
                             text={"Top Up"}
                             size="sm"
-                            bgColor={["primary", "main"]}
+                            bgColor={mainColor}
                             border={["transparent", "primary"]}
                             color={["primary", "white"]}
                             type="button"

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.header`
-  background-color: ${({mainColor}) =>  mainColor &&  '#063159'};
+  background-color: ${({mainColor}) =>  mainColor ||  '#063159'};
   padding: 20px;
     *{
         font-family: ${({fontFamily, theme }) => fontFamily ||  theme.typography.fontFamily[fontFamily]};

@@ -9,6 +9,7 @@ const Tab = ({
   nonActiveColor,
   full,
   activeColor,
+  nonActivebgColor,
 }) => {
   const onClickTab = () => onClick(label);
 
@@ -18,6 +19,7 @@ const Tab = ({
       onClick={onClickTab}
       nonActiveColor={nonActiveColor}
       activeColor={activeColor}
+      nonActivebgColor={nonActivebgColor}
       full={full}
     >
       {label}
