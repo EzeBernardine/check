@@ -36,7 +36,6 @@ const Cash = (props) => {
     }
 
     useEffect(() => {
-        console.log("props?.clientLedger?.id ", props?.clientLedger?.id);
         getUserWallet(props?.clientLedger?.id || userId).catch(console.error);
         getUserWalletTransactions(props?.clientLedger?.id || userId).catch(console.error);
         handlePaymentProvider(props?.clientLedger?.id || userId).catch(console.error);
@@ -55,7 +54,6 @@ const Cash = (props) => {
     const handlePaymentProvider = async (ledgerId) => {
         const {error, data} = await billingAction.getPaymentProvider(props.baseURL, ledgerId)
         if (error) return Alert.showError({content: error});
-        // setBalance(data?._embedded?.wallets?.[0]?.balance || 0)
 
 
         setCashoutProviders(data._embedded?.paymentProviders?.filter(provider => provider.providerType === "CASH_OUT") || [])

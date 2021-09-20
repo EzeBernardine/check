@@ -115,7 +115,7 @@ export default function Disburse(props) {
         );
     }
     return (
-        <Layout>
+        <>
             <Container1>
                 <Nav navItems={[{name: 'Home /', href: '/'}, {name: 'Cashout', href: '/cashout'} ]}/>
 
@@ -187,6 +187,6 @@ export default function Disburse(props) {
                     </FormContainer>
                 </Container2>
             </Container1>
-        </Layout>
+        </>
     );
 }
