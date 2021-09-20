@@ -114,21 +114,21 @@ export const getPaymentProviderById = async (baseURL, providerId) => {
   }
 };
 
-// export const withdrawWinning = async (baseURL, payload) => {
-//   try {
-//     const { data } = await axios.post(
-//       baseURL + `/billing/withdraw `,
-//       {
-//         ...payload,
-//       },
-//       {
-//         headers: getHeaders(),
-//       }
-//     );
-//     return {
-//       data: data,
-//     };
-//   } catch (e) {
-//     return { error: errorHandler(e) };
-//   }
-// };
+export const withdrawWinning = async (baseURL, payload) => {
+  try {
+    const { data } = await axios.post(
+      baseURL + `/billing/withdraw `,
+      {
+        ...payload,
+      },
+      {
+        headers: getHeaders(),
+      }
+    );
+    return {
+      data: data,
+    };
+  } catch (e) {
+    return { error: errorHandler(e) };
+  }
+};
