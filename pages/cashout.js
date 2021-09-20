@@ -18,7 +18,7 @@ const  Cashout = (props) =>  {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [providers, setProviders] = useState([]);
-    console.log("Router", router.query)
+    // console.log("Router", router.query)
     useEffect(() => {
         if(!props?.router?.query.ledger){
             return router.push("/");

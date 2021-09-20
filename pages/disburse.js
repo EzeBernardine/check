@@ -15,6 +15,7 @@ import {useRouter} from "next/router";
 
 import Nav from '../components/Nav'
 import * as billingAction from "../actions/billing";
+import { UseContext } from "../lib/context";
 
 
 export default function Disburse(props) {
@@ -25,9 +26,12 @@ export default function Disburse(props) {
     const [inputs, setInputs] = useState([])
     const [pageLoading, setPageLoading] = useState(true);
     const [loading, setLoading] = useState(false);
+    const  { portalConfig: { mainColor } } = UseContext()
+
+
     useEffect(() => {
 
-        console.log("Props", props);
+        // console.log("Props", props);
         //initialize
         if(!props?.router?.query.ledger){
             Alert.showError({content: "Ledger Not Found"})
@@ -46,7 +50,7 @@ export default function Disburse(props) {
 
 
     useEffect(() => {
-        console.log("provider change", provider)
+        // console.log("provider change", provider)
         if(!provider) return;
 
         initialize(provider.name)
@@ -56,7 +60,7 @@ export default function Disburse(props) {
 
     const getProvider = async (providerId) => {
         const {error, data} = await billingAction.getPaymentProviderById(props.baseURL, providerId)
-        console.log("getProvider", error, data);
+        // console.log("getProvider", error, data);
         if (error) {
             Alert.showError({content: error});
             return;
@@ -68,7 +72,7 @@ export default function Disburse(props) {
 
     const initialize = async (providerName) => {
         const {error, data} = await tpsAction.disburse.initialize(props.baseURL, providerName);
-        console.log("initialize", error, data);
+        // console.log("initialize", error, data);
         if (error) {
             Alert.showError({content: error});
             return router.push("/");
@@ -78,10 +82,10 @@ export default function Disburse(props) {
     };
     const handleChange = (e) => {
         e.preventDefault();
-        console.log("Payload", {
-            ...payload,
-            [e.target.name]: e.target.value,
-        });
+        // console.log("Payload", {
+        //     ...payload,
+        //     [e.target.name]: e.target.value,
+        // });
         setPayload({
             ...payload,
             [e.target.name]: e.target.value,
@@ -90,9 +94,9 @@ export default function Disburse(props) {
 
     const onSubmit  = async () => {
         setLoading(true);
-        console.log("payload", payload);
+        // console.log("payload", payload);
         const {error: transferAuthError, data: transferAuthData} = await tpsAction.disburse.process(props.baseURL, provider.name, payload);
-        console.log("transferAuth", transferAuthError, transferAuthData)
+        // console.log("transferAuth", transferAuthError, transferAuthData)
         if (transferAuthError) {
             setLoading(false)
             return Alert.showError({content: "Oops! We are unable to complete your airtime purchase"});
@@ -175,7 +179,7 @@ export default function Disburse(props) {
                                     text={"Process"}
                                     size="md"
                                     isLoading={loading}
-                                    bgColor={["primary", "main"]}
+                                    bgColor={mainColor}
                                     border={["transparent", "primary"]}
                                     color={["primary", "white"]}
                                     type="button"
