@@ -15,39 +15,14 @@ import { redirectToLogin } from '../lib/utils'
 
 function MyApp({Component, pageProps, ...rest}) {
     const router = useRouter();
-    const {baseURL, authURL} = rest;
 
-
-    console.log("Version: 13", process.env);
+    console.log("Version: 14", process.env);
     const inFiveMinutes = new Date(new Date().getTime() + 5 * 60 * 1000);
     for (let key in router.query) {
         // Cookies.set(key, router.query[key], {expires: inFiveMinutes})
         Cookies.set(key, router.query[key], {expires: 1})
     }
-    Cookies.set("clientId", router.query["client-id"])
-
-    useEffect(() => {
-        getClientInfo();
-      }, []);
-
-      const getClientInfo = async () => {
-        const clientID = "client-id";
-        const query = qs.parse(window.location.search);
-            if (!query["auth-token"]) {
-                let localData = localStorage.getItem(clientID);
-                console.log(localData, 'localData')
-                if (!localData) {
-                    redirectToLogin(authURL);
-                    return;
-                }
-
-            }
-            // check if token is still valid
-            const {data, error} = await auth(baseURL)
-            .catch((err) => redirectToLogin(authUrl));
-
-        }
-
+    // Cookies.set("clientId", router.query["client-id"])
     return (
         <>
             <ThemeProvider theme={theme}>

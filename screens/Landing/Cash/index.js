@@ -36,12 +36,12 @@ const Cash = (props) => {
   }
 
   useEffect(() => {
-    getUserWallet(props?.clientLedger?.id || userId).catch(console.error);
-    getUserWalletTransactions(props?.clientLedger?.id || userId).catch(
-      console.error
-    );
-    console.log("USED CLIENT L \n", props?.clientLedger);
-    handlePaymentProvider(props?.clientLedger?.id).catch(console.error);
+    getUserWallet(props?.clientLedger?.id)
+        .catch(console.error);
+    getUserWalletTransactions(props?.clientLedger?.id)
+        .catch(console.error);
+    handlePaymentProvider(props?.clientLedger?.id)
+        .catch(console.error);
   }, []);
 
   const getUserWallet = async (ledgerId) => {
