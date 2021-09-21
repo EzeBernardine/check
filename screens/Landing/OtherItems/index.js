@@ -50,7 +50,7 @@ const OtherItems = (props) => {
                 weight="fontWeightNormal"
                 fontFamily="sagoeBold"
             >
-                Other Items
+                Other Gifts
             </Header1>
 
             <Modal show={invoiceId?.length > 0} title='Redemption Code' handleClose={() => setInvoiceId('')}>
