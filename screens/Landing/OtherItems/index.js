@@ -57,17 +57,6 @@ const OtherItems = (props) => {
                 <Flex direction='column'>
                     <Span
                         color={["grey", "0", theme]}
-                        size="font14"
-                        lineHeight="lineHeight19"
-                        weight="fontWeightMedium"
-                        fontFamily="sagoe"
-                        center
-                    >
-                        Congratulations! You have won a laptop. To redeem your prize, send your full details to dkusimo@jobberman.com and visit the Jobberman head office to collect your prize. Don’t forget to tell your friends to complete the FREE soft skills training and WIN BIG! Start here http://Jobberman.com/softskills
-                    </Span>
-                    <Spacer height='10px'/>
-                    <Span
-                        color={["grey", "0", theme]}
                         size="font28"
                         lineHeight="lineHeight30"
                         weight="fontWeightMedium"
@@ -77,6 +66,18 @@ const OtherItems = (props) => {
                         {invoiceId}4
                         54
                     </Span>
+                    <Spacer height='10px'/>
+                    <Span
+                        color={["grey", "0", theme]}
+                        size="font14"
+                        lineHeight="lineHeight19"
+                        weight="fontWeightMedium"
+                        fontFamily="sagoe"
+                        center
+                    >
+                        Congratulations! You have won a laptop. To redeem your prize, send your full details to dkusimo@jobberman.com and visit the Jobberman head office to collect your prize. Don’t forget to tell your friends to complete the FREE soft skills training and WIN BIG! Start here http://Jobberman.com/softskills
+                    </Span>
+                
                 </Flex>
             </Modal>
 
